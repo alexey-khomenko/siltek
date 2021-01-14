@@ -8,6 +8,7 @@ mix
     .js('resources/scripts/app.js', 'js/scripts.js')
     .js('node_modules/alpinejs/dist/alpine.js', 'js/alpine.js')
     .sass('resources/styles/app.scss', 'css/styles.css')
+    .sass('resources/styles/customer.scss', 'template.css')
     .options({
         postCss: [
             require('tailwindcss')('tailwind.config.js'),
