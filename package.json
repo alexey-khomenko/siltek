@@ -1,0 +1,39 @@
+{
+  "name": "siltek",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alexey-khomenko/siltek.git"
+  },
+  "scripts": {
+    "dev": "npx mix",
+    "watch": "npx mix watch",
+    "watch-poll": "npx mix watch -- --watch-options-poll=1000",
+    "compress": "bread-compressor -s docs/**/*.*",
+    "hot": "npx mix watch --hot",
+    "prod": "npx mix --production && npm run compress"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "alpinejs": "^2.8.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.0.2",
+    "bread-compressor-cli": "^1.1.0",
+    "browser-sync": "^2.26.13",
+    "browser-sync-webpack-plugin": "^2.0.1",
+    "cross-env": "^7.0",
+    "laravel-mix": "^6.0.9",
+    "laravel-mix-pug": "^0.3.0",
+    "lodash": "^4.17.19",
+    "postcss": "^8.1.8",
+    "pug": "^3.0.0",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.29.0",
+    "sass-loader": "^8.0.2",
+    "tailwindcss": "^2.0.1",
+    "vue-template-compiler": "^2.6.12"
+  }
+}

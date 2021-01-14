@@ -1,0 +1,12 @@
+@import "global/_variables.scss";
+
+// @import "../../node_modules/tailwindcss/base.css";
+@import "global/_global.scss";
+
+@import "../../node_modules/tailwindcss/components.css";
+@import "components/_components.scss";
+
+@import "../../node_modules/tailwindcss/utilities.css";
+@import "utilities/custom-utilities.scss";
+
+// plugins
