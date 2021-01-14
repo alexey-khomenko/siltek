@@ -145,3 +145,10 @@ h1.title-category-h1 {
 .section-content {
   padding: 0.5em 0;
 }
+
+@media (max-width: 768px) {
+  .block-form-questions {
+    background-color: #fff;
+    padding: 2em;
+  }
+}

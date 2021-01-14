@@ -8,11 +8,12 @@ block main
     - link = '#';
 
     - step = 1;
+
+    - calculated = false;
     - photo = '';
     - product = '';
     - color = '';
     - pack = '';
-    - calculated = false;
     -
         products = {
             id1: '',
@@ -33,7 +34,7 @@ block main
     - pigments_price_up = 0;
     - pigments_price_amount = 0;
     - base_price = 0;
-    - discount = 0;
+    - base_discount = 0;
     - base_amount = 0;
     - amount = 0;
     -
@@ -50,18 +51,17 @@ block main
             }
         };
 
-    form(action=action, class="tw-bg-white md:tw-p-7")
+    form(action=action, class="block-form-questions")
         section()
             | ...
         section()
             | ...
 
 //-
+    без tw ?
     2 экрана
     - товар, цвет, тара,  фото (если хватает места)
     - пигменты, стоимость
-
-    -
 
     анимация сдвига
     справо налево step 1 -> 2
@@ -97,13 +97,13 @@ block main
     при выборе тары
         ДАЛЕЕ - блокируем
         пигмены, цены, ... - для второго экрана - грузим
-            передаём mode = pigments, product, color, pack, discount
+            передаём mode = pigments, product, color, pack, base_discount
         ДАЛЕЕ- разблокируем
 
     при выборе кнопки ДАЛЕЕ, кнопки НАЗАД
         меняем экран
 
     при смене % скидки
-        передаём mode = pigments, product, color, pack, discount
+        передаём mode = pigments, product, color, pack, base_discount
 
-        меняем весь второй экран?
+        меняем весь второй экран
