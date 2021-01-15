@@ -137,3 +137,76 @@ h1.title-category-h1 {
     padding: 2em;
   }
 }
+
+.row {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+}
+
+.between-xs {
+  justify-content: space-between;
+}
+
+.col-xs-6 {
+  flex: 0 0 auto;
+  flex-basis: 50%;
+  max-width: 50%;
+  box-sizing: border-box;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.button {
+  cursor: pointer;
+  font-size: 1em;
+  line-height: 1.2;
+  display: inline-flex;
+  padding: .75em 2.2em;
+  transition: all .3s ease;
+  text-align: center;
+  color: #262626;
+  border: 1px solid transparent;
+  outline: none;
+  background: #fc0;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: #fc0;
+    border: 1px solid rgba(255, 205, 0, .15);
+    background: #262626;
+  }
+
+  &.gray-button {
+    background: transparent;
+    border: 1px solid #ccc;
+    color: #959595;
+
+    &:hover {
+      background: #ffcc00;
+      border: 1px solid #fc0;
+      color: #000000;
+    }
+  }
+}

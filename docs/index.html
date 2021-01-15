@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width">
-    <link rel="stylesheet" href="template.css">
     <link href="js/scripts.js" rel="preload" as="script">
     <link href="js/alpine.js" rel="preload" as="script">
+    <link rel="stylesheet" href="template.css">
     <link rel="stylesheet" href="css/styles.css">
     <title>Калькулятор вартості тонування водно-дисперсійних матеріалів ТМ SILTEK
     </title>
@@ -20,9 +20,124 @@
               </h1>
             </div>
             <div class="section-content">
-              <form class="tw-bg-white md:tw-p-7" action="ajax.php">
-                <section>...</section>
-                <section>...</section>
+              <form class="block-form-questions text-center bx-master-calculator-wrap" action="ajax.php" x-data="formData()" x-init="loadProducts()" @submit.prevent="console.log('submit')">
+                <table x-show="step === 1">
+                  <tbody>
+                    <tr>
+                      <td class="text-right">Продукт</td>
+                      <td>
+                        <select name="product" @change="product = $event.target.value; loadColors();" :disabled="!products.length">
+                          <template x-if="!product">
+                            <option></option>
+                          </template>
+                          <template x-for="item in products" :key="item.id">
+                            <option :value="item.id" x-text="item.name"></option>
+                          </template>
+                        </select>
+                      </td>
+                      <td rowspan="4">
+                        <template x-if="photo"><img :src="photo"></template>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-right">Номер кольору</td>
+                      <td>
+                        <select name="color" @change="color = $event.target.value; loadPacks()" :disabled="!colors.length">
+                          <template x-if="!color">
+                            <option></option>
+                          </template>
+                          <template x-for="item in colors" :key="item.id">
+                            <option :value="item.id" x-text="item.name"></option>
+                          </template>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-right">Тара</td>
+                      <td>
+                        <select name="pack" @change="pack = $event.target.value; loadBases()" :disabled="!packs.length">
+                          <template x-if="!pack">
+                            <option></option>
+                          </template>
+                          <template x-for="item in packs" :key="item.id">
+                            <option :value="item.id" x-text="item.name"></option>
+                          </template>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-right">База</td>
+                      <td>
+                        <select name="base" @change="base = $event.target.value; loadPigments()" :disabled="!bases.length">
+                          <template x-if="!base">
+                            <option></option>
+                          </template>
+                          <template x-for="item in bases" :key="item.id">
+                            <option :value="item.id" x-text="item.name"></option>
+                          </template>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table x-show="step === 2" x-cloak>
+                  <tbody>
+                    <tr>
+                      <td>Пігмент</td>
+                      <td>Кількість, мл</td>
+                      <td>Ціна пігменту, грн з ПДВ</td>
+                    </tr>
+                    <template x-for="item in pigments">
+                      <tr>
+                        <td x-text="item.name"></td>
+                        <td x-text="item.quantity"></td>
+                        <td x-text="item.price"></td>
+                      </tr>
+                    </template>
+                    <tr>
+                      <td class="text-right" colspan="2">Ціна пігментів, грн. з ПДВ</td>
+                      <td x-text="pigments_price"></td>
+                    </tr>
+                    <tr>
+                      <td class="text-right" colspan="2">Доплата за тонування, грн. з ПДВ</td>
+                      <td x-text="pigments_price_up"></td>
+                    </tr>
+                    <tr>
+                      <td class="text-right" colspan="2">Загальна вартість тонування, грн. з ПДВ</td>
+                      <td x-text="pigments_price_amount"></td>
+                    </tr>
+                    <tr>
+                      <td class="text-right" colspan="2">Рекомендована роздрібна вартість продукту-основи, грн. з ПДВ</td>
+                      <td x-text="base_price"></td>
+                    </tr>
+                    <tr>
+                      <td class="text-right" colspan="2">% знижки</td>
+                      <td>
+                        <input class="text-center" name="base_discount" x-model="base_discount" @change="loadPigments()">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-right" colspan="2">Вартість продукту-основи зі знижкою, грн з ПДВ</td>
+                      <td x-text="base_amount"></td>
+                    </tr>
+                    <tr>
+                      <td class="text-right" colspan="2">Сума, грн з ПДВ</td>
+                      <td x-text="amount"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row between-xs" x-show="step === 1">
+                  <div class="col-xs-6 text-left"><a class="button gray-button" href="#">Назад</a></div>
+                  <div class="col-xs-6 text-right">
+                    <button class="button" type="submit" :disabled="!pigments.length" @click="step = 2">Далі</button>
+                  </div>
+                </div>
+                <div class="row between-xs" x-show="step === 2" x-cloak>
+                  <div class="col-xs-6 text-left">
+                    <button class="button gray-button" type="button" @click="step = 1">Назад</button>
+                  </div>
+                  <div class="col-xs-6 text-right"><a class="button" href="#">Готово</a></div>
+                </div>
               </form>
             </div>
           </article>

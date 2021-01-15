@@ -1,12 +1,43 @@
-@import "global/_variables.scss";
+.bx-master-calculator-wrap {
+  table {
+    width: calc(100% + 1em);
+    margin: 0 -0.5em 3em;
 
-// @import "../../node_modules/tailwindcss/base.css";
-// @import "global/_global.scss";
+    td {
+      padding: 0.5em;
 
-@import "../../node_modules/tailwindcss/components.css";
-@import "components/_components.scss";
+      select {
+        display: block;
+        border: none;
+        background-color: #ddd;
+        border-radius: 0;
+        width: 100%;
+        line-height: 2em;
+        cursor: pointer;
 
-@import "../../node_modules/tailwindcss/utilities.css";
-@import "utilities/custom-utilities.scss";
+        &:disabled {
+          cursor: not-allowed;
+        }
+      }
 
-// plugins
+      img {
+        display: block;
+      }
+    }
+  }
+
+  .button:disabled:hover {
+    cursor: not-allowed;
+    color: #262626;
+    border: 1px solid transparent;
+    outline: none;
+    background: #fc0;
+  }
+
+  .button.gray-button:disabled:hover {
+    cursor: not-allowed;
+    background: transparent;
+    border: 1px solid #ccc;
+    color: #959595;
+  }
+}

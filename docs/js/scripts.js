@@ -1,183 +1,245 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
+function formData() {
+    return {
+        step: 1,
+        calculated: false,
 
-/***/ "./resources/scripts/app.js":
-/*!**********************************!*\
-  !*** ./resources/scripts/app.js ***!
-  \**********************************/
-/***/ (() => {
+        product: 0,
+        products: [],
+        color: 0,
+        colors: [],
+        pack: 0,
+        packs: [],
+        base: 0,
+        bases: [],
+        photo: '',
 
-console.log("hello, World");
+        pigments: [],
+        pigments_price: 0,
+        pigments_price_up: 0,
+        pigments_price_amount: 0,
+        base_price: 0,
+        base_discount: 0,
+        base_amount: 0,
+        amount: 0,
 
-/***/ }),
+        loadProducts: function () {
+            const mode = 'products';
 
-/***/ "./resources/styles/app.scss":
-/*!***********************************!*\
-  !*** ./resources/styles/app.scss ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+            this.product = 0;
+            this.products = [];
+            this.color = 0;
+            this.colors = [];
+            this.pack = 0;
+            this.packs = [];
+            this.base = 0;
+            this.bases = [];
+            this.photo = '';
+            this.pigments = [];
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
+            setTimeout(() => {
+                this.products = this.load(mode);
+            }, 300);
+        },
 
+        loadColors: function () {
+            const mode = 'colors';
 
-/***/ }),
+            this.color = 0;
+            this.colors = [];
+            this.pack = 0;
+            this.packs = [];
+            this.base = 0;
+            this.bases = [];
+            this.photo = '';
+            this.pigments = [];
 
-/***/ "./resources/styles/customer.scss":
-/*!****************************************!*\
-  !*** ./resources/styles/customer.scss ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+            setTimeout(() => {
+                this.colors = this.load(mode);
+            }, 300);
+        },
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
+        loadPacks: function () {
+            const mode = 'packs';
 
+            this.pack = 0;
+            this.packs = [];
+            this.base = 0;
+            this.bases = [];
+            this.photo = '';
+            this.pigments = [];
 
-/***/ })
+            setTimeout(() => {
+                this.packs = this.load(mode);
+            }, 300);
+        },
 
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		if(__webpack_module_cache__[moduleId]) {
-/******/ 			return __webpack_module_cache__[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
-/******/ 	// the startup function
-/******/ 	// It's empty as some runtime module handles the default behavior
-/******/ 	__webpack_require__.x = x => {}
-/************************************************************************/
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// Promise = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"/js/scripts": 0
-/******/ 		};
-/******/ 		
-/******/ 		var deferredModules = [
-/******/ 			["./resources/scripts/app.js"],
-/******/ 			["./resources/styles/app.scss"],
-/******/ 			["./resources/styles/customer.scss"]
-/******/ 		];
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		var checkDeferredModules = x => {};
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime, executeModules] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0, resolves = [];
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					resolves.push(installedChunks[chunkId][0]);
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			for(moduleId in moreModules) {
-/******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 				}
-/******/ 			}
-/******/ 			if(runtime) runtime(__webpack_require__);
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			while(resolves.length) {
-/******/ 				resolves.shift()();
-/******/ 			}
-/******/ 		
-/******/ 			// add entry modules from loaded chunk to deferred list
-/******/ 			if(executeModules) deferredModules.push.apply(deferredModules, executeModules);
-/******/ 		
-/******/ 			// run deferred modules when all chunks ready
-/******/ 			return checkDeferredModules();
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunksiltek"] = self["webpackChunksiltek"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 		
-/******/ 		function checkDeferredModulesImpl() {
-/******/ 			var result;
-/******/ 			for(var i = 0; i < deferredModules.length; i++) {
-/******/ 				var deferredModule = deferredModules[i];
-/******/ 				var fulfilled = true;
-/******/ 				for(var j = 1; j < deferredModule.length; j++) {
-/******/ 					var depId = deferredModule[j];
-/******/ 					if(installedChunks[depId] !== 0) fulfilled = false;
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferredModules.splice(i--, 1);
-/******/ 					result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
-/******/ 				}
-/******/ 			}
-/******/ 			if(deferredModules.length === 0) {
-/******/ 				__webpack_require__.x();
-/******/ 				__webpack_require__.x = x => {};
-/******/ 			}
-/******/ 			return result;
-/******/ 		}
-/******/ 		var startup = __webpack_require__.x;
-/******/ 		__webpack_require__.x = () => {
-/******/ 			// reset startup function so it can be called again when more startup code is added
-/******/ 			__webpack_require__.x = startup || (x => {});
-/******/ 			return (checkDeferredModules = checkDeferredModulesImpl)();
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-/******/ 	// run startup
-/******/ 	return __webpack_require__.x();
-/******/ })()
-;
+        loadBases: function () {
+            const mode = 'bases';
+
+            this.base = 0;
+            this.bases = [];
+            this.photo = '';
+            this.pigments = [];
+
+            setTimeout(() => {
+                this.bases = this.load(mode);
+            }, 300);
+        },
+
+        loadPigments: function () {
+            const mode = 'pigments';
+
+            this.photo = '';
+            this.pigments = [];
+            this.pigments_price = 0;
+            this.pigments_price_up = 0;
+            this.pigments_price_amount = 0;
+            this.base_price = 0;
+            this.base_amount = 0;
+            this.amount = 0;
+
+            setTimeout(() => {
+                let result = this.load(mode);
+
+                this.photo = result.photo;
+                this.pigments = result.pigments;
+                this.pigments_price = result.pigments_price;
+                this.pigments_price_up = result.pigments_price_up;
+                this.pigments_price_amount = result.pigments_price_amount;
+                this.base_price = result.base_price;
+                this.base_amount = result.base_amount;
+                this.amount = result.amount;
+            }, 300);
+        },
+
+        load: function (mode) {
+            const link = this.$el.action;
+            const data = new FormData();
+
+            data.append('mode', mode);
+            data.append('product', this.product);
+            data.append('color', this.color);
+            data.append('pack', this.pack);
+            data.append('base', this.base);
+            data.append('base_discount', this.base_discount);
+
+            console.log(link);
+            console.log(mode);
+
+            return this.mock(mode);
+        },
+
+        mock: function (mode) {
+            switch (mode) {
+                case 'products':
+                    return [
+                        {
+                            id: 1,
+                            name: 'name1',
+                        },
+                        {
+                            id: 2,
+                            name: 'name2',
+                        },
+                        {
+                            id: 3,
+                            name: 'name3',
+                        },
+                        {
+                            id: 4,
+                            name: 'name4',
+                        },
+                    ];
+                case 'colors':
+                    return [
+                        {
+                            id: 1,
+                            name: 'color1',
+                        },
+                        {
+                            id: 2,
+                            name: 'color2',
+                        },
+                        {
+                            id: 3,
+                            name: 'color3',
+                        },
+                        {
+                            id: 4,
+                            name: 'color4',
+                        },
+                    ];
+                case 'packs':
+                    return [
+                        {
+                            id: 1,
+                            name: 'pack1',
+                        },
+                        {
+                            id: 2,
+                            name: 'pack2',
+                        },
+                        {
+                            id: 3,
+                            name: 'pack3',
+                        },
+                        {
+                            id: 4,
+                            name: 'pack4',
+                        },
+                    ];
+                case 'bases':
+                    return [
+                        {
+                            id: 1,
+                            name: 'base1',
+                        },
+                        {
+                            id: 2,
+                            name: 'base2',
+                        },
+                        {
+                            id: 3,
+                            name: 'base3',
+                        },
+                        {
+                            id: 4,
+                            name: 'base4',
+                        },
+                    ];
+                case 'pigments':
+                    return {
+                        pigments: [
+                            {
+                                name: 'name1',
+                                quantity: 'quantity1',
+                                price: 'price1',
+                            },
+                            {
+                                name: 'name2',
+                                quantity: 'quantity2',
+                                price: 'price2',
+                            },
+                            {
+                                name: 'name3',
+                                quantity: 'quantity3',
+                                price: 'price3',
+                            },
+                            {
+                                name: 'name4',
+                                quantity: 'quantity4',
+                                price: 'price4',
+                            },
+                        ],
+                        pigments_price : 100,
+                        pigments_price_up : 20,
+                        pigments_price_amount : 120,
+                        base_price : 300,
+                        base_amount : 300,
+                        amount : 420,
+                        photo: 'https://avatars3.githubusercontent.com/u/59030169?s=200&v=4'
+                    };
+            }
+        }
+    };
+}
