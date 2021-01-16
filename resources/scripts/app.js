@@ -1,5 +1,5 @@
 import 'alpinejs';
-window.calculatorInit = function () {
+window.calculatorData = function () {
     return {
         step: 1,
         calculated: false,

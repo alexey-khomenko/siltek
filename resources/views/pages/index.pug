@@ -7,7 +7,7 @@ block main
     - action = 'ajax.php';
     - link = '#';
 
-    form(action=action, class="block-form-questions text-center bx-master-calculator-wrap", x-data="calculatorInit()", x-init="loadProducts()", @submit.prevent="")
+    form(action=action, class="block-form-questions text-center bx-master-calculator-wrap", x-data="calculatorData()", x-init="loadProducts()", @submit.prevent="")
         include ../page/index/step-1
         include ../page/index/step-2
         include ../page/index/buttons-step-1

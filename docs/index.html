@@ -19,7 +19,7 @@
               </h1>
             </div>
             <div class="section-content">
-              <form class="block-form-questions text-center bx-master-calculator-wrap" action="ajax.php" x-data="calculatorInit()" x-init="loadProducts()" @submit.prevent="">
+              <form class="block-form-questions text-center bx-master-calculator-wrap" action="ajax.php" x-data="calculatorData()" x-init="loadProducts()" @submit.prevent="">
                 <table x-show="step === 1">
                   <tbody>
                     <tr>
@@ -112,7 +112,7 @@
                     <tr>
                       <td class="text-right" colspan="2">% знижки</td>
                       <td>
-                        <input class="text-center" name="base_discount" x-model="base_discount" @change="loadPigments()">
+                        <input class="text-center" type="number" name="base_discount" x-model.number="base_discount" @paste="console.log('calculate')" @input="console.log('calculate')">
                       </td>
                     </tr>
                     <tr>

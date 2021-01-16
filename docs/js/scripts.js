@@ -1964,7 +1964,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(alpinejs__WEBPACK_IMPORTED_MODULE_0__);
 
 
-window.calculatorInit = function () {
+window.calculatorData = function () {
   return {
     step: 1,
     calculated: false,
