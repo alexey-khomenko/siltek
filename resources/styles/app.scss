@@ -1,4 +1,30 @@
-.bx-master-calculator-wrap {
+.bxm-calculator-wrap {
+  overflow: hidden;
+
+  .bxm-step-1-left {
+    width: 158px;
+  }
+
+  .bxm-step-1-right {
+    width: 14.25em;
+  }
+
+  .bxm-step-1-right-inner {
+    width: 13.25em;
+  }
+
+  .bxm-step-2-right {
+    width: 7em;
+  }
+
+  .bxm-step-2-right-inner {
+    width: 6em;
+  }
+
+  .bxm-steps {
+    display: flex;
+  }
+
   table {
     width: calc(100% + 1em);
     margin: 0 -0.5em 3em;
@@ -8,20 +34,45 @@
 
       select {
         display: block;
-        border: none;
-        background-color: #ddd;
+        background-color: #fff;
+        border: 1px solid #eee;
         border-radius: 0;
         width: 100%;
-        line-height: 2em;
+        padding: 0 0.5em;
+        height: 2.5em;
+        line-height: 2.5em;
         cursor: pointer;
+        appearance: none;
+        font-size: inherit;
 
         &:disabled {
           cursor: not-allowed;
         }
       }
 
+      input {
+        background-color: #fff;
+        border: 1px solid transparent;
+        border-bottom-color: #eee;
+        font-size: inherit;
+        padding: 0 0.5em;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        &[type=number] {
+          -moz-appearance: textfield;
+        }
+      }
+
       img {
         display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
     }
   }
@@ -40,4 +91,52 @@
     border: 1px solid #ccc;
     color: #959595;
   }
+
+  [x-cloak] {
+    display: none !important;
+  }
+/*
+  .bxm-transition {
+    transition: transform 400ms linear;
+
+    &-1-enter {
+      &-start {
+        transform:translateX(-100%);
+      }
+
+      &-end {
+        transform:translateX(0);
+      }
+    }
+
+    &-1-leave {
+      &-start {
+        transform:translateX(0);
+      }
+
+      &-end {
+        transform:translateX(-100%);
+      }
+    }
+
+    &-2-enter {
+      &-start {
+        transform:translateX(100%);
+      }
+
+      &-end {
+        transform:translateX(0);
+      }
+    }
+
+    &-2-leave {
+      &-start {
+        transform:translateX(0);
+      }
+
+      &-end {
+        transform:translateX(100%);
+      }
+    }
+  }*/
 }

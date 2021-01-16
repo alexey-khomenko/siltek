@@ -1,20 +1,32 @@
+//-
+    ,
+        x-transition:enter="bxm-transition",
+        x-transition:enter-start="bxm-transition-1-enter-start",
+        x-transition:enter-end="bxm-transition-1-enter-end",
+        x-transition:leave="bxm-transition",
+        x-transition:leave-start="bxm-transition-1-leave-start",
+        x-transition:leave-end="bxm-transition-1-leave-end",
+
 table(x-show="step === 1")
     tbody
         tr
-            td(class="text-right")
-                | Продукт
+            td(class="text-right bxm-step-1-left")
+                strong
+                    | Продукт
             td
                 select(name="product", @change="product = $event.target.value; loadColors();", :disabled="!products.length")
                     template(x-if="!product")
                         option
                     template(x-for="item in products", :key="item.id")
                         option(:value="item.id", x-text="item.name")
-            td(rowspan="4")
-                template(x-if="photo")
-                    img(:src="photo")
+            td(rowspan="4", class="bxm-step-1-right")
+                div(class="bxm-step-1-right-inner")
+                    template(x-if="photo")
+                        img(:src="photo")
         tr
-            td(class="text-right")
-                | Номер кольору
+            td(class="text-right bxm-step-1-left")
+                strong
+                    | Номер кольору
             td
                 select(name="color", @change="color = $event.target.value; loadPacks()", :disabled="!colors.length")
                     template(x-if="!color")
@@ -22,8 +34,9 @@ table(x-show="step === 1")
                     template(x-for="item in colors", :key="item.id")
                         option(:value="item.id", x-text="item.name")
         tr
-            td(class="text-right")
-                | Тара
+            td(class="text-right bxm-step-1-left")
+                strong
+                    | Тара
             td
                 select(name="pack", @change="pack = $event.target.value; loadBases()", :disabled="!packs.length")
                     template(x-if="!pack")
@@ -31,8 +44,9 @@ table(x-show="step === 1")
                     template(x-for="item in packs", :key="item.id")
                         option(:value="item.id", x-text="item.name")
         tr
-            td(class="text-right")
-                | База
+            td(class="text-right bxm-step-1-left")
+                strong
+                    | База
             td
                 select(name="base", @change="base = $event.target.value; loadPigments()", :disabled="!bases.length")
                     template(x-if="!base")

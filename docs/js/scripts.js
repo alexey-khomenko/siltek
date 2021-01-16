@@ -1962,9 +1962,13 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(alpinejs__WEBPACK_IMPORTED_MODULE_0__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 window.calculatorData = function () {
+  var _discount;
+
   return {
     step: 1,
     calculated: false,
@@ -1985,6 +1989,18 @@ window.calculatorData = function () {
     base_discount: 0,
     base_amount: 0,
     amount: 0,
+    discount: (_discount = {}, _defineProperty(_discount, "@change", function change() {
+      this.calculateDiscount();
+    }), _defineProperty(_discount, "@input", function input() {
+      this.calculateDiscount();
+    }), _defineProperty(_discount, "@paste", function paste() {
+      this.calculateDiscount();
+    }), _discount),
+    calculateDiscount: function calculateDiscount() {
+      this.base_discount = parseFloat(+this.base_discount).toFixed(2);
+      this.base_amount = parseFloat(+this.base_price - +this.base_price * +this.base_discount / 100).toFixed(2);
+      this.amount = parseFloat(+this.base_amount + +this.pigments_price_amount).toFixed(2);
+    },
     loadProducts: function loadProducts() {
       var _this = this;
 
@@ -2051,12 +2067,12 @@ window.calculatorData = function () {
 
         _this5.photo = result.photo;
         _this5.pigments = result.pigments;
-        _this5.pigments_price = result.pigments_price;
-        _this5.pigments_price_up = result.pigments_price_up;
-        _this5.base_price = result.base_price;
-        _this5.pigments_price_amount = _this5.pigments_price + _this5.pigments_price_up;
-        _this5.base_amount = _this5.base_price + _this5.pigments_price_amount;
-        _this5.amount = _this5.base_amount;
+        _this5.pigments_price = parseFloat(result.pigments_price).toFixed(2);
+        _this5.pigments_price_up = parseFloat(result.pigments_price_up).toFixed(2);
+        _this5.pigments_price_amount = parseFloat(+_this5.pigments_price + +_this5.pigments_price_up).toFixed(2);
+        _this5.base_price = parseFloat(result.base_price).toFixed(2);
+        _this5.base_amount = parseFloat(_this5.base_price).toFixed(2);
+        _this5.amount = parseFloat(+_this5.base_amount + +_this5.pigments_price_amount).toFixed(2);
       }, 300);
     },
     load: function load(mode) {
@@ -2067,8 +2083,7 @@ window.calculatorData = function () {
       data.append('color', this.color);
       data.append('pack', this.pack);
       data.append('base', this.base);
-      console.log(link);
-      console.log(mode);
+      console.log(link + ' ' + mode);
       return this.mock(mode);
     },
     cleanStep2: function cleanStep2() {

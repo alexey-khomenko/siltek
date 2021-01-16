@@ -23,6 +23,24 @@ window.calculatorData = function () {
         base_amount: 0,
         amount: 0,
 
+        discount: {
+            ["@change"](){
+                this.calculateDiscount();
+            },
+            ["@input"](){
+                this.calculateDiscount();
+            },
+            ["@paste"](){
+                this.calculateDiscount();
+            },
+        },
+
+        calculateDiscount: function () {
+            this.base_discount = parseFloat(+this.base_discount).toFixed(2);
+            this.base_amount = parseFloat((+this.base_price) - (+this.base_price) * (+this.base_discount) / 100).toFixed(2);
+            this.amount = parseFloat((+this.base_amount) + (+this.pigments_price_amount)).toFixed(2);
+        },
+
         loadProducts: function () {
             const mode = 'products';
 
@@ -93,13 +111,15 @@ window.calculatorData = function () {
 
                 this.photo = result.photo;
                 this.pigments = result.pigments;
-                this.pigments_price = result.pigments_price;
-                this.pigments_price_up = result.pigments_price_up;
-                this.base_price = result.base_price;
 
-                this.pigments_price_amount = this.pigments_price + this.pigments_price_up;
-                this.base_amount = this.base_price + this.pigments_price_amount;
-                this.amount = this.base_amount;
+                this.pigments_price = parseFloat(result.pigments_price).toFixed(2);
+                this.pigments_price_up = parseFloat(result.pigments_price_up).toFixed(2);
+                this.pigments_price_amount = parseFloat((+this.pigments_price) + (+this.pigments_price_up)).toFixed(2);
+
+                this.base_price = parseFloat(result.base_price).toFixed(2);
+                this.base_amount = parseFloat(this.base_price).toFixed(2);
+
+                this.amount = parseFloat((+this.base_amount) + (+this.pigments_price_amount)).toFixed(2);
             }, 300);
         },
 
@@ -113,8 +133,7 @@ window.calculatorData = function () {
             data.append('pack', this.pack);
             data.append('base', this.base);
 
-            console.log(link);
-            console.log(mode);
+            console.log(link + ' ' + mode);
 
             return this.mock(mode);
         },
