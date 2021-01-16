@@ -1,0 +1,41 @@
+table(x-show="step === 1")
+    tbody
+        tr
+            td(class="text-right")
+                | Продукт
+            td
+                select(name="product", @change="product = $event.target.value; loadColors();", :disabled="!products.length")
+                    template(x-if="!product")
+                        option
+                    template(x-for="item in products", :key="item.id")
+                        option(:value="item.id", x-text="item.name")
+            td(rowspan="4")
+                template(x-if="photo")
+                    img(:src="photo")
+        tr
+            td(class="text-right")
+                | Номер кольору
+            td
+                select(name="color", @change="color = $event.target.value; loadPacks()", :disabled="!colors.length")
+                    template(x-if="!color")
+                        option
+                    template(x-for="item in colors", :key="item.id")
+                        option(:value="item.id", x-text="item.name")
+        tr
+            td(class="text-right")
+                | Тара
+            td
+                select(name="pack", @change="pack = $event.target.value; loadBases()", :disabled="!packs.length")
+                    template(x-if="!pack")
+                        option
+                    template(x-for="item in packs", :key="item.id")
+                        option(:value="item.id", x-text="item.name")
+        tr
+            td(class="text-right")
+                | База
+            td
+                select(name="base", @change="base = $event.target.value; loadPigments()", :disabled="!bases.length")
+                    template(x-if="!base")
+                        option
+                    template(x-for="item in bases", :key="item.id")
+                        option(:value="item.id", x-text="item.name")

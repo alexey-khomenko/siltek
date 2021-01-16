@@ -1,7 +1,6 @@
 {
-    "/js/alpine.js": "/js/alpine.js",
+    "/js/scripts.js": "/js/scripts.js",
     "/template.css": "/template.css",
     "/css/styles.css": "/css/styles.css",
-    "/js/scripts.js": "/js/scripts.js",
     "/index.html": "/index.html"
 }

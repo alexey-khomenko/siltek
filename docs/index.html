@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width">
     <link href="js/scripts.js" rel="preload" as="script">
-    <link href="js/alpine.js" rel="preload" as="script">
     <link rel="stylesheet" href="template.css">
     <link rel="stylesheet" href="css/styles.css">
     <title>Калькулятор вартості тонування водно-дисперсійних матеріалів ТМ SILTEK
@@ -20,7 +19,7 @@
               </h1>
             </div>
             <div class="section-content">
-              <form class="block-form-questions text-center bx-master-calculator-wrap" action="ajax.php" x-data="formData()" x-init="loadProducts()" @submit.prevent="console.log('submit')">
+              <form class="block-form-questions text-center bx-master-calculator-wrap" action="ajax.php" x-data="calculatorInit()" x-init="loadProducts()" @submit.prevent="">
                 <table x-show="step === 1">
                   <tbody>
                     <tr>
@@ -146,6 +145,5 @@
       </div>
     </section>
     <script src="js/scripts.js" defer="defer"></script>
-    <script src="js/alpine.js" defer="defer"></script>
   </body>
 </html>

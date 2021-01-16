@@ -5,8 +5,9 @@ mix
     .setPublicPath('docs')
     // .copyDirectory('resources/images/*.*', 'docs/images')
     // .copyDirectory('resources/favicons/*.*', 'docs/favicons')
-    .copy('resources/scripts/app.js', 'docs/js/scripts.js')
-    .js('node_modules/alpinejs/dist/alpine.js', 'js')
+    //.copy('resources/scripts/app.js', 'docs/js/scripts.js')
+    //.js('node_modules/alpinejs/dist/alpine.js', 'js')
+    .js('resources/scripts/app.js', 'js/scripts.js')
     .sass('resources/styles/app.scss', 'css/styles.css')
     .sass('resources/styles/customer.scss', 'template.css')
     // .options({

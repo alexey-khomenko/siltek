@@ -1,0 +1,48 @@
+table(x-show="step === 2", x-cloak)
+    tbody
+        tr
+            td
+                | Пігмент
+            td
+                | Кількість, мл
+            td
+                | Ціна пігменту, грн з ПДВ
+
+        template(x-for="item in pigments")
+            tr
+                td(x-text="item.name")
+                td(x-text="item.quantity")
+                td(x-text="item.price")
+
+        tr
+            td(colspan="2", class="text-right")
+                | Ціна пігментів, грн. з ПДВ
+            td(x-text="pigments_price")
+        tr
+            td(colspan="2", class="text-right")
+                | Доплата за тонування, грн. з ПДВ
+            td(x-text="pigments_price_up")
+        tr
+            td(colspan="2", class="text-right")
+                | Загальна вартість тонування, грн. з ПДВ
+            td(x-text="pigments_price_amount")
+        tr
+            td(colspan="2", class="text-right")
+                | Рекомендована роздрібна вартість продукту-основи, грн. з ПДВ
+            td(x-text="base_price")
+        tr
+            td(colspan="2", class="text-right")
+                | % знижки
+            td
+                input(type="number", name="base_discount", x-model.number="base_discount", class="text-center",
+                    @paste="console.log('calculate')",
+                    @input="console.log('calculate')"
+                )
+        tr
+            td(colspan="2", class="text-right")
+                | Вартість продукту-основи зі знижкою, грн з ПДВ
+            td(x-text="base_amount")
+        tr
+            td(colspan="2", class="text-right")
+                | Сума, грн з ПДВ
+            td(x-text="amount")

@@ -1,0 +1,7 @@
+div(class="row between-xs", x-show="step === 2", x-cloak)
+    div(class="col-xs-6 text-left")
+        button(type="button", class="button gray-button", @click="step = 1")
+            | Назад
+    div(class="col-xs-6 text-right")
+        a(href=link, class="button")
+            | Готово

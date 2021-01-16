@@ -1,4 +1,5 @@
-function formData() {
+import 'alpinejs';
+window.calculatorInit = function () {
     return {
         step: 1,
         calculated: false,
@@ -11,8 +12,8 @@ function formData() {
         packs: [],
         base: 0,
         bases: [],
-        photo: '',
 
+        photo: '',
         pigments: [],
         pigments_price: 0,
         pigments_price_up: 0,
@@ -33,8 +34,7 @@ function formData() {
             this.packs = [];
             this.base = 0;
             this.bases = [];
-            this.photo = '';
-            this.pigments = [];
+            this.cleanStep2();
 
             setTimeout(() => {
                 this.products = this.load(mode);
@@ -50,8 +50,7 @@ function formData() {
             this.packs = [];
             this.base = 0;
             this.bases = [];
-            this.photo = '';
-            this.pigments = [];
+            this.cleanStep2();
 
             setTimeout(() => {
                 this.colors = this.load(mode);
@@ -65,8 +64,7 @@ function formData() {
             this.packs = [];
             this.base = 0;
             this.bases = [];
-            this.photo = '';
-            this.pigments = [];
+            this.cleanStep2();
 
             setTimeout(() => {
                 this.packs = this.load(mode);
@@ -78,8 +76,7 @@ function formData() {
 
             this.base = 0;
             this.bases = [];
-            this.photo = '';
-            this.pigments = [];
+            this.cleanStep2();
 
             setTimeout(() => {
                 this.bases = this.load(mode);
@@ -89,14 +86,7 @@ function formData() {
         loadPigments: function () {
             const mode = 'pigments';
 
-            this.photo = '';
-            this.pigments = [];
-            this.pigments_price = 0;
-            this.pigments_price_up = 0;
-            this.pigments_price_amount = 0;
-            this.base_price = 0;
-            this.base_amount = 0;
-            this.amount = 0;
+            this.cleanStep2();
 
             setTimeout(() => {
                 let result = this.load(mode);
@@ -105,10 +95,11 @@ function formData() {
                 this.pigments = result.pigments;
                 this.pigments_price = result.pigments_price;
                 this.pigments_price_up = result.pigments_price_up;
-                this.pigments_price_amount = result.pigments_price_amount;
                 this.base_price = result.base_price;
-                this.base_amount = result.base_amount;
-                this.amount = result.amount;
+
+                this.pigments_price_amount = this.pigments_price + this.pigments_price_up;
+                this.base_amount = this.base_price + this.pigments_price_amount;
+                this.amount = this.base_amount;
             }, 300);
         },
 
@@ -121,12 +112,23 @@ function formData() {
             data.append('color', this.color);
             data.append('pack', this.pack);
             data.append('base', this.base);
-            data.append('base_discount', this.base_discount);
 
             console.log(link);
             console.log(mode);
 
             return this.mock(mode);
+        },
+
+        cleanStep2: function () {
+            this.photo = '';
+            this.pigments = [];
+            this.pigments_price = 0;
+            this.pigments_price_up = 0;
+            this.pigments_price_amount = 0;
+            this.base_price = 0;
+            this.base_discount = 0;
+            this.base_amount = 0;
+            this.amount = 0;
         },
 
         mock: function (mode) {
@@ -231,12 +233,11 @@ function formData() {
                                 price: 'price4',
                             },
                         ],
+
                         pigments_price : 100,
                         pigments_price_up : 20,
-                        pigments_price_amount : 120,
                         base_price : 300,
-                        base_amount : 300,
-                        amount : 420,
+
                         photo: 'https://avatars3.githubusercontent.com/u/59030169?s=200&v=4'
                     };
             }
