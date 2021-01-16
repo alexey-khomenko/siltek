@@ -3,10 +3,18 @@
 
   .bxm-step-1-left {
     width: 158px;
+
+    @media (max-width: 1023px) {
+      width: 92px;
+    }
   }
 
   .bxm-step-1-right {
     width: 14.25em;
+
+    @media (max-width: 575px) {
+      display: none;
+    }
   }
 
   .bxm-step-1-right-inner {

@@ -48,8 +48,18 @@
 .bxm-calculator-wrap .bxm-step-1-left {
   width: 158px;
 }
+@media (max-width: 1023px) {
+  .bxm-calculator-wrap .bxm-step-1-left {
+    width: 92px;
+  }
+}
 .bxm-calculator-wrap .bxm-step-1-right {
   width: 14.25em;
+}
+@media (max-width: 575px) {
+  .bxm-calculator-wrap .bxm-step-1-right {
+    display: none;
+  }
 }
 .bxm-calculator-wrap .bxm-step-1-right-inner {
   width: 13.25em;
