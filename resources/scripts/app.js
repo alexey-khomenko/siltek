@@ -1,4 +1,5 @@
 import 'alpinejs';
+
 window.calculatorData = function () {
     return {
         step: 1,
@@ -52,7 +53,7 @@ window.calculatorData = function () {
             this.cleanStep2();
 
             setTimeout(() => {
-                this.products = this.load(mode);
+                this.load(mode).then(r => this.products = r);
             }, 300);
         },
 
@@ -68,7 +69,7 @@ window.calculatorData = function () {
             this.cleanStep2();
 
             setTimeout(() => {
-                this.colors = this.load(mode);
+                this.load(mode).then(r => this.colors = r);
             }, 300);
         },
 
@@ -82,7 +83,7 @@ window.calculatorData = function () {
             this.cleanStep2();
 
             setTimeout(() => {
-                this.packs = this.load(mode);
+                this.load(mode).then(r => this.packs = r);
             }, 300);
         },
 
@@ -94,7 +95,7 @@ window.calculatorData = function () {
             this.cleanStep2();
 
             setTimeout(() => {
-                this.bases = this.load(mode);
+                this.load(mode).then(r => this.bases = r);
             }, 300);
         },
 
@@ -105,22 +106,23 @@ window.calculatorData = function () {
 
             setTimeout(() => {
                 let result = this.load(mode);
+                this.load(mode).then(r => {
+                    this.photo = r.photo;
+                    this.pigments = r.pigments;
 
-                this.photo = result.photo;
-                this.pigments = result.pigments;
+                    this.pigments_price = parseFloat(r.pigments_price).toFixed(2);
+                    this.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
+                    this.pigments_price_amount = parseFloat((+this.pigments_price) + (+this.pigments_price_up)).toFixed(2);
 
-                this.pigments_price = parseFloat(result.pigments_price).toFixed(2);
-                this.pigments_price_up = parseFloat(result.pigments_price_up).toFixed(2);
-                this.pigments_price_amount = parseFloat((+this.pigments_price) + (+this.pigments_price_up)).toFixed(2);
+                    this.base_price = parseFloat(r.base_price).toFixed(2);
+                    this.base_amount = parseFloat(this.base_price).toFixed(2);
 
-                this.base_price = parseFloat(result.base_price).toFixed(2);
-                this.base_amount = parseFloat(this.base_price).toFixed(2);
-
-                this.amount = parseFloat((+this.base_amount) + (+this.pigments_price_amount)).toFixed(2);
+                    this.amount = parseFloat((+this.base_amount) + (+this.pigments_price_amount)).toFixed(2);
+                });
             }, 300);
         },
 
-        load: function (mode) {
+        load: async function (mode) {
             const link = this.$el.action;
             const data = new FormData();
 
@@ -130,9 +132,8 @@ window.calculatorData = function () {
             data.append('pack', this.pack);
             data.append('base', this.base);
 
-            console.log(link + ' ' + mode);
-
-            return this.mock(mode);
+            const response = await fetch(link, {method: 'POST', body: data});
+            return await response.json();
         },
 
         cleanStep2: function () {
@@ -146,117 +147,5 @@ window.calculatorData = function () {
             this.base_amount = 0;
             this.amount = 0;
         },
-
-        mock: function (mode) {
-            switch (mode) {
-                case 'products':
-                    return [
-                        {
-                            id: 1,
-                            name: 'name1',
-                        },
-                        {
-                            id: 2,
-                            name: 'name2',
-                        },
-                        {
-                            id: 3,
-                            name: 'name3',
-                        },
-                        {
-                            id: 4,
-                            name: 'name4',
-                        },
-                    ];
-                case 'colors':
-                    return [
-                        {
-                            id: 1,
-                            name: 'color1',
-                        },
-                        {
-                            id: 2,
-                            name: 'color2',
-                        },
-                        {
-                            id: 3,
-                            name: 'color3',
-                        },
-                        {
-                            id: 4,
-                            name: 'color4',
-                        },
-                    ];
-                case 'packs':
-                    return [
-                        {
-                            id: 1,
-                            name: 'pack1',
-                        },
-                        {
-                            id: 2,
-                            name: 'pack2',
-                        },
-                        {
-                            id: 3,
-                            name: 'pack3',
-                        },
-                        {
-                            id: 4,
-                            name: 'pack4',
-                        },
-                    ];
-                case 'bases':
-                    return [
-                        {
-                            id: 1,
-                            name: 'base1',
-                        },
-                        {
-                            id: 2,
-                            name: 'base2',
-                        },
-                        {
-                            id: 3,
-                            name: 'base3',
-                        },
-                        {
-                            id: 4,
-                            name: 'base4',
-                        },
-                    ];
-                case 'pigments':
-                    return {
-                        pigments: [
-                            {
-                                name: 'name1',
-                                quantity: 'quantity1',
-                                price: 'price1',
-                            },
-                            {
-                                name: 'name2',
-                                quantity: 'quantity2',
-                                price: 'price2',
-                            },
-                            {
-                                name: 'name3',
-                                quantity: 'quantity3',
-                                price: 'price3',
-                            },
-                            {
-                                name: 'name4',
-                                quantity: 'quantity4',
-                                price: 'price4',
-                            },
-                        ],
-
-                        pigments_price : 100,
-                        pigments_price_up : 20,
-                        base_price : 300,
-
-                        photo: 'https://avatars3.githubusercontent.com/u/59030169?s=200&v=4'
-                    };
-            }
-        }
     };
 }
