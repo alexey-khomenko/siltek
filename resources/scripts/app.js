@@ -254,7 +254,7 @@ window.calculatorData = function () {
                         pigments_price_up : 20,
                         base_price : 300,
 
-                        photo: 'https://avatars3.githubusercontent.com/u/59030169?s=200&v=4'
+                        photo: './images/1.jpg'
                     };
             }
         }

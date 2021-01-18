@@ -4,7 +4,7 @@ mix.pug = require('laravel-mix-pug');
 mix
     .setPublicPath('docs')
     .setResourceRoot('../')
-    // .copyDirectory('resources/images/*.*', 'docs/images')
+    .copyDirectory('resources/images/*.*', 'docs/images')
     // .copyDirectory('resources/favicons/*.*', 'docs/favicons')
     .js('resources/scripts/app.js', 'js/scripts.js')
     .sass('resources/styles/app.scss', 'css/styles.css')
