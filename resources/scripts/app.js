@@ -19,24 +19,21 @@ window.calculatorData = function () {
         pigments_price_up: 0,
         pigments_price_amount: 0,
         base_price: 0,
-        base_discount: 0,
+        base_discount: '0.0',
         base_amount: 0,
         amount: 0,
 
         discount: {
-            ["@change"](){
+            ["@input.debounce"](){
                 this.calculateDiscount();
             },
-            ["@input"](){
-                this.calculateDiscount();
-            },
-            ["@paste"](){
+            ["@paste.debounce"](){
                 this.calculateDiscount();
             },
         },
 
         calculateDiscount: function () {
-            this.base_discount = parseFloat(+this.base_discount).toFixed(2);
+            this.base_discount = parseFloat(+this.base_discount).toFixed(1);
             this.base_amount = parseFloat((+this.base_price) - (+this.base_price) * (+this.base_discount) / 100).toFixed(2);
             this.amount = parseFloat((+this.base_amount) + (+this.pigments_price_amount)).toFixed(2);
         },
@@ -145,7 +142,7 @@ window.calculatorData = function () {
             this.pigments_price_up = 0;
             this.pigments_price_amount = 0;
             this.base_price = 0;
-            this.base_discount = 0;
+            this.base_discount = '0.0';
             this.base_amount = 0;
             this.amount = 0;
         },
