@@ -10,8 +10,7 @@ window.calculatorData = function () {
         colors: [],
         pack: 0,
         packs: [],
-        base: 0,
-        bases: [],
+        base: '',
 
         photo: '',
         pigments: [],
@@ -47,8 +46,7 @@ window.calculatorData = function () {
             this.colors = [];
             this.pack = 0;
             this.packs = [];
-            this.base = 0;
-            this.bases = [];
+            this.base = '';
             this.cleanStep2();
 
             setTimeout(() => {
@@ -63,8 +61,7 @@ window.calculatorData = function () {
             this.colors = [];
             this.pack = 0;
             this.packs = [];
-            this.base = 0;
-            this.bases = [];
+            this.base = '';
             this.cleanStep2();
 
             setTimeout(() => {
@@ -77,24 +74,13 @@ window.calculatorData = function () {
 
             this.pack = 0;
             this.packs = [];
-            this.base = 0;
-            this.bases = [];
+            this.base = '';
             this.cleanStep2();
 
             setTimeout(() => {
-                this.packs = this.load(mode);
-            }, 300);
-        },
-
-        loadBases: function () {
-            const mode = 'bases';
-
-            this.base = 0;
-            this.bases = [];
-            this.cleanStep2();
-
-            setTimeout(() => {
-                this.bases = this.load(mode);
+                let result = this.load(mode);
+                this.base = result.base;
+                this.packs = result.packs;
             }, 300);
         },
 
@@ -128,7 +114,6 @@ window.calculatorData = function () {
             data.append('product', this.product);
             data.append('color', this.color);
             data.append('pack', this.pack);
-            data.append('base', this.base);
 
             console.log(link + ' ' + mode);
 
@@ -188,43 +173,27 @@ window.calculatorData = function () {
                         },
                     ];
                 case 'packs':
-                    return [
-                        {
-                            id: 1,
-                            name: 'pack1',
-                        },
-                        {
-                            id: 2,
-                            name: 'pack2',
-                        },
-                        {
-                            id: 3,
-                            name: 'pack3',
-                        },
-                        {
-                            id: 4,
-                            name: 'pack4',
-                        },
-                    ];
-                case 'bases':
-                    return [
-                        {
-                            id: 1,
-                            name: 'base1',
-                        },
-                        {
-                            id: 2,
-                            name: 'base2',
-                        },
-                        {
-                            id: 3,
-                            name: 'base3',
-                        },
-                        {
-                            id: 4,
-                            name: 'base4',
-                        },
-                    ];
+                    return {
+                        packs: [
+                            {
+                                id: 1,
+                                name: 'pack1',
+                            },
+                            {
+                                id: 2,
+                                name: 'pack2',
+                            },
+                            {
+                                id: 3,
+                                name: 'pack3',
+                            },
+                            {
+                                id: 4,
+                                name: 'pack4',
+                            },
+                        ],
+                        base: 'base1'
+                    };
                 case 'pigments':
                     return {
                         pigments: [

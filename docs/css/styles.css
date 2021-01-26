@@ -119,6 +119,12 @@
   -o-object-fit: contain;
      object-fit: contain;
 }
+.bxm-calculator-wrap table td .bxm-base {
+  text-align: left;
+  line-height: 40px;
+  height: 40px;
+  padding: 0 9px;
+}
 .bxm-calculator-wrap .button:disabled:hover {
   cursor: not-allowed;
   color: #262626;

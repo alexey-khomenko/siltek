@@ -1978,8 +1978,7 @@ window.calculatorData = function () {
     colors: [],
     pack: 0,
     packs: [],
-    base: 0,
-    bases: [],
+    base: '',
     photo: '',
     pigments: [],
     pigments_price: 0,
@@ -2009,8 +2008,7 @@ window.calculatorData = function () {
       this.colors = [];
       this.pack = 0;
       this.packs = [];
-      this.base = 0;
-      this.bases = [];
+      this.base = '';
       this.cleanStep2();
       setTimeout(function () {
         _this.products = _this.load(mode);
@@ -2024,8 +2022,7 @@ window.calculatorData = function () {
       this.colors = [];
       this.pack = 0;
       this.packs = [];
-      this.base = 0;
-      this.bases = [];
+      this.base = '';
       this.cleanStep2();
       setTimeout(function () {
         _this2.colors = _this2.load(mode);
@@ -2037,40 +2034,31 @@ window.calculatorData = function () {
       var mode = 'packs';
       this.pack = 0;
       this.packs = [];
-      this.base = 0;
-      this.bases = [];
+      this.base = '';
       this.cleanStep2();
       setTimeout(function () {
-        _this3.packs = _this3.load(mode);
-      }, 300);
-    },
-    loadBases: function loadBases() {
-      var _this4 = this;
+        var result = _this3.load(mode);
 
-      var mode = 'bases';
-      this.base = 0;
-      this.bases = [];
-      this.cleanStep2();
-      setTimeout(function () {
-        _this4.bases = _this4.load(mode);
+        _this3.base = result.base;
+        _this3.packs = result.packs;
       }, 300);
     },
     loadPigments: function loadPigments() {
-      var _this5 = this;
+      var _this4 = this;
 
       var mode = 'pigments';
       this.cleanStep2();
       setTimeout(function () {
-        var result = _this5.load(mode);
+        var result = _this4.load(mode);
 
-        _this5.photo = result.photo;
-        _this5.pigments = result.pigments;
-        _this5.pigments_price = parseFloat(result.pigments_price).toFixed(2);
-        _this5.pigments_price_up = parseFloat(result.pigments_price_up).toFixed(2);
-        _this5.pigments_price_amount = parseFloat(+_this5.pigments_price + +_this5.pigments_price_up).toFixed(2);
-        _this5.base_price = parseFloat(result.base_price).toFixed(2);
-        _this5.base_amount = parseFloat(_this5.base_price).toFixed(2);
-        _this5.amount = parseFloat(+_this5.base_amount + +_this5.pigments_price_amount).toFixed(2);
+        _this4.photo = result.photo;
+        _this4.pigments = result.pigments;
+        _this4.pigments_price = parseFloat(result.pigments_price).toFixed(2);
+        _this4.pigments_price_up = parseFloat(result.pigments_price_up).toFixed(2);
+        _this4.pigments_price_amount = parseFloat(+_this4.pigments_price + +_this4.pigments_price_up).toFixed(2);
+        _this4.base_price = parseFloat(result.base_price).toFixed(2);
+        _this4.base_amount = parseFloat(_this4.base_price).toFixed(2);
+        _this4.amount = parseFloat(+_this4.base_amount + +_this4.pigments_price_amount).toFixed(2);
       }, 300);
     },
     load: function load(mode) {
@@ -2080,7 +2068,6 @@ window.calculatorData = function () {
       data.append('product', this.product);
       data.append('color', this.color);
       data.append('pack', this.pack);
-      data.append('base', this.base);
       console.log(link + ' ' + mode);
       return this.mock(mode);
     },
@@ -2128,34 +2115,22 @@ window.calculatorData = function () {
           }];
 
         case 'packs':
-          return [{
-            id: 1,
-            name: 'pack1'
-          }, {
-            id: 2,
-            name: 'pack2'
-          }, {
-            id: 3,
-            name: 'pack3'
-          }, {
-            id: 4,
-            name: 'pack4'
-          }];
-
-        case 'bases':
-          return [{
-            id: 1,
-            name: 'base1'
-          }, {
-            id: 2,
-            name: 'base2'
-          }, {
-            id: 3,
-            name: 'base3'
-          }, {
-            id: 4,
-            name: 'base4'
-          }];
+          return {
+            packs: [{
+              id: 1,
+              name: 'pack1'
+            }, {
+              id: 2,
+              name: 'pack2'
+            }, {
+              id: 3,
+              name: 'pack3'
+            }, {
+              id: 4,
+              name: 'pack4'
+            }],
+            base: 'base1'
+          };
 
         case 'pigments':
           return {
