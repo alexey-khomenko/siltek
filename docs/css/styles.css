@@ -125,6 +125,26 @@
   height: 40px;
   padding: 0 9px;
 }
+.bxm-calculator-wrap table td svg {
+  -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
 .bxm-calculator-wrap .button:disabled:hover {
   cursor: not-allowed;
   color: #262626;
