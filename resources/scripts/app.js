@@ -4,6 +4,7 @@ window.calculatorData = function () {
     return {
         step: 1,
         calculated: false,
+        loading: false,
 
         product: 0,
         products: [],
@@ -38,7 +39,7 @@ window.calculatorData = function () {
             this.amount = parseFloat((+this.base_amount) + (+this.pigments_price_amount)).toFixed(2);
         },
 
-        loadProducts: function () {
+        loadProducts: async function () {
             const mode = 'products';
 
             this.product = 0;
@@ -50,12 +51,10 @@ window.calculatorData = function () {
             this.base = '';
             this.cleanStep2();
 
-            setTimeout(() => {
-                this.load(mode).then(r => this.products = r);
-            }, 300);
+            this.load(mode).then(r => this.products = r);
         },
 
-        loadColors: function () {
+        loadColors: async function () {
             const mode = 'colors';
 
             this.color = 0;
@@ -65,12 +64,10 @@ window.calculatorData = function () {
             this.base = '';
             this.cleanStep2();
 
-            setTimeout(() => {
-                this.load(mode).then(r => this.colors = r);
-            }, 300);
+            this.load(mode).then(r => this.colors = r);
         },
 
-        loadPacks: function () {
+        loadPacks: async function () {
             const mode = 'packs';
 
             this.pack = 0;
@@ -78,35 +75,30 @@ window.calculatorData = function () {
             this.base = '';
             this.cleanStep2();
 
-            setTimeout(() => {
-                this.load(mode).then(r => {
-                    this.base = r.base;
-                    this.packs = r.packs;
-                });
-            }, 300);
+            this.load(mode).then(r => {
+                this.base = r.base;
+                this.packs = r.packs;
+            });
         },
 
-        loadPigments: function () {
+        loadPigments: async function () {
             const mode = 'pigments';
 
             this.cleanStep2();
 
-            setTimeout(() => {
-                let result = this.load(mode);
-                this.load(mode).then(r => {
-                    this.photo = r.photo;
-                    this.pigments = r.pigments;
+            this.load(mode).then(r => {
+                this.photo = r.photo;
+                this.pigments = r.pigments;
 
-                    this.pigments_price = parseFloat(r.pigments_price).toFixed(2);
-                    this.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
-                    this.pigments_price_amount = parseFloat((+this.pigments_price) + (+this.pigments_price_up)).toFixed(2);
+                this.pigments_price = parseFloat(r.pigments_price).toFixed(2);
+                this.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
+                this.pigments_price_amount = parseFloat((+this.pigments_price) + (+this.pigments_price_up)).toFixed(2);
 
-                    this.base_price = parseFloat(r.base_price).toFixed(2);
-                    this.base_amount = parseFloat(this.base_price).toFixed(2);
+                this.base_price = parseFloat(r.base_price).toFixed(2);
+                this.base_amount = parseFloat(this.base_price).toFixed(2);
 
-                    this.amount = parseFloat((+this.base_amount) + (+this.pigments_price_amount)).toFixed(2);
-                });
-            }, 300);
+                this.amount = parseFloat((+this.base_amount) + (+this.pigments_price_amount)).toFixed(2);
+            });
         },
 
         load: async function (mode) {
@@ -118,7 +110,11 @@ window.calculatorData = function () {
             data.append('color', this.color);
             data.append('pack', this.pack);
 
+            this.loading = true;
             const response = await fetch(link, {method: 'POST', body: data});
+            await new Promise(resolve => setTimeout(resolve, 300));
+            this.loading = false;
+
             return await response.json();
         },
 
