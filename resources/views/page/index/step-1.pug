@@ -38,7 +38,7 @@ table(x-show="step === 1")
                 strong
                     | Тара
             td
-                select(name="pack", @change="pack = $event.target.value; loadBases()", :disabled="!packs.length")
+                select(name="pack", @change="pack = $event.target.value; loadPigments()", :disabled="!packs.length")
                     template(x-if="!pack")
                         option
                     template(x-for="item in packs", :key="item.id")
@@ -48,8 +48,4 @@ table(x-show="step === 1")
                 strong
                     | База
             td
-                select(name="base", @change="base = $event.target.value; loadPigments()", :disabled="!bases.length")
-                    template(x-if="!base")
-                        option
-                    template(x-for="item in bases", :key="item.id")
-                        option(:value="item.id", x-text="item.name")
+                div(class="bxm-base", x-text="base")

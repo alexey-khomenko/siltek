@@ -11,8 +11,7 @@ window.calculatorData = function () {
         colors: [],
         pack: 0,
         packs: [],
-        base: 0,
-        bases: [],
+        base: '',
 
         photo: '',
         pigments: [],
@@ -48,8 +47,7 @@ window.calculatorData = function () {
             this.colors = [];
             this.pack = 0;
             this.packs = [];
-            this.base = 0;
-            this.bases = [];
+            this.base = '';
             this.cleanStep2();
 
             setTimeout(() => {
@@ -64,8 +62,7 @@ window.calculatorData = function () {
             this.colors = [];
             this.pack = 0;
             this.packs = [];
-            this.base = 0;
-            this.bases = [];
+            this.base = '';
             this.cleanStep2();
 
             setTimeout(() => {
@@ -78,24 +75,14 @@ window.calculatorData = function () {
 
             this.pack = 0;
             this.packs = [];
-            this.base = 0;
-            this.bases = [];
+            this.base = '';
             this.cleanStep2();
 
             setTimeout(() => {
-                this.load(mode).then(r => this.packs = r);
-            }, 300);
-        },
-
-        loadBases: function () {
-            const mode = 'bases';
-
-            this.base = 0;
-            this.bases = [];
-            this.cleanStep2();
-
-            setTimeout(() => {
-                this.load(mode).then(r => this.bases = r);
+                this.load(mode).then(r => {
+                    this.base = r.base;
+                    this.packs = r.packs;
+                });
             }, 300);
         },
 
@@ -130,7 +117,6 @@ window.calculatorData = function () {
             data.append('product', this.product);
             data.append('color', this.color);
             data.append('pack', this.pack);
-            data.append('base', this.base);
 
             const response = await fetch(link, {method: 'POST', body: data});
             return await response.json();

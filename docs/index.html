@@ -57,7 +57,7 @@
                       <tr>
                         <td class="text-right bxm-step-1-left"><strong>Тара</strong></td>
                         <td>
-                          <select name="pack" @change="pack = $event.target.value; loadBases()" :disabled="!packs.length">
+                          <select name="pack" @change="pack = $event.target.value; loadPigments()" :disabled="!packs.length">
                             <template x-if="!pack">
                               <option></option>
                             </template>
@@ -70,14 +70,7 @@
                       <tr>
                         <td class="text-right bxm-step-1-left"><strong>База</strong></td>
                         <td>
-                          <select name="base" @change="base = $event.target.value; loadPigments()" :disabled="!bases.length">
-                            <template x-if="!base">
-                              <option></option>
-                            </template>
-                            <template x-for="item in bases" :key="item.id">
-                              <option :value="item.id" x-text="item.name"></option>
-                            </template>
-                          </select>
+                          <div class="bxm-base" x-text="base"></div>
                         </td>
                       </tr>
                     </tbody>
