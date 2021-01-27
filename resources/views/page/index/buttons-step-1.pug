@@ -1,7 +1,0 @@
-div(class="row between-xs", x-show="step === 1")
-    div(class="col-xs-6 text-left")
-        a(href=link, class="button gray-button")
-            | Назад
-    div(class="col-xs-6 text-right")
-        button(type="submit", class="button", :disabled="!pigments.length", @click="step = 2")
-            | Далі
