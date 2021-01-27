@@ -5,11 +5,7 @@ block title
 
 block main
     - action = 'ajax.php';
-    - link = '#';
 
     form(action=action, class="block-form-questions text-center bxm-calculator-wrap", x-data="calculatorData()", x-init="loadProducts()", @submit.prevent="")
-        div(class="bxm-steps")
-            include ../page/index/step-1
-            include ../page/index/step-2
-        include ../page/index/buttons-step-1
-        include ../page/index/buttons-step-2
+        include ../page/index/step-1
+        include ../page/index/step-2
