@@ -1989,8 +1989,7 @@ window.calculatorData = function () {
   var _discount;
 
   return {
-    step: 1,
-    calculated: false,
+    step2: false,
     loading: false,
     product: 0,
     products: [],
@@ -2144,8 +2143,9 @@ window.calculatorData = function () {
                 this.base_price = parseFloat(result.base_price).toFixed(2);
                 this.base_amount = parseFloat(this.base_price).toFixed(2);
                 this.amount = parseFloat(+this.base_amount + +this.pigments_price_amount).toFixed(2);
+                this.step2 = true;
 
-              case 13:
+              case 14:
               case "end":
                 return _context4.stop();
             }
@@ -2176,7 +2176,7 @@ window.calculatorData = function () {
                 this.loading = true;
                 _context5.next = 10;
                 return new Promise(function (resolve) {
-                  return setTimeout(resolve, 3000);
+                  return setTimeout(resolve, 500);
                 });
 
               case 10:
@@ -2198,6 +2198,7 @@ window.calculatorData = function () {
       return load;
     }(),
     cleanStep2: function cleanStep2() {
+      this.step2 = false;
       this.photo = '';
       this.pigments = [];
       this.pigments_price = 0;

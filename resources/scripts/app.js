@@ -1,8 +1,7 @@
 import 'alpinejs';
 window.calculatorData = function () {
     return {
-        step: 1,
-        calculated: false,
+        step2: false,
         loading: false,
 
         product: 0,
@@ -98,6 +97,7 @@ window.calculatorData = function () {
 
             this.amount = parseFloat((+this.base_amount) + (+this.pigments_price_amount)).toFixed(2);
 
+            this.step2 = true;
         },
 
         load: async function (mode) {
@@ -112,13 +112,15 @@ window.calculatorData = function () {
             console.log(link + ' ' + mode);
 
             this.loading = true;
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            await new Promise(resolve => setTimeout(resolve, 500));
             this.loading = false;
 
             return this.mock(mode);
         },
 
         cleanStep2: function () {
+            this.step2 = false;
+
             this.photo = '';
             this.pigments = [];
             this.pigments_price = 0;

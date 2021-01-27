@@ -1,49 +1,5 @@
 .bxm-calculator-wrap {
   overflow: hidden;
-  /*
-    .bxm-transition {
-      transition: transform 400ms linear;
-
-      &-1-enter {
-        &-start {
-          transform:translateX(-100%);
-        }
-
-        &-end {
-          transform:translateX(0);
-        }
-      }
-
-      &-1-leave {
-        &-start {
-          transform:translateX(0);
-        }
-
-        &-end {
-          transform:translateX(-100%);
-        }
-      }
-
-      &-2-enter {
-        &-start {
-          transform:translateX(100%);
-        }
-
-        &-end {
-          transform:translateX(0);
-        }
-      }
-
-      &-2-leave {
-        &-start {
-          transform:translateX(0);
-        }
-
-        &-end {
-          transform:translateX(100%);
-        }
-      }
-    }*/
 }
 .bxm-calculator-wrap .bxm-step-1-left {
   width: 158px;
@@ -70,12 +26,9 @@
 .bxm-calculator-wrap .bxm-step-2-right-inner {
   width: 6em;
 }
-.bxm-calculator-wrap .bxm-steps {
-  display: flex;
-}
 .bxm-calculator-wrap table {
   width: calc(100% + 1em);
-  margin: 0 -0.5em 3em;
+  margin: 0 -0.5em;
 }
 .bxm-calculator-wrap table td {
   padding: 0.5em;
@@ -97,6 +50,7 @@
 }
 .bxm-calculator-wrap table td select:disabled {
   cursor: not-allowed;
+  background-color: #eee;
 }
 .bxm-calculator-wrap table td input {
   background-color: #fff;
@@ -145,18 +99,8 @@
     transform: rotate(1turn);
   }
 }
-.bxm-calculator-wrap .button:disabled:hover {
-  cursor: not-allowed;
-  color: #262626;
-  border: 1px solid transparent;
-  outline: none;
-  background: #fc0;
-}
-.bxm-calculator-wrap .button.gray-button:disabled:hover {
-  cursor: not-allowed;
-  background: transparent;
-  border: 1px solid #ccc;
-  color: #959595;
+.bxm-calculator-wrap hr {
+  margin: 1em 0;
 }
 .bxm-calculator-wrap [x-cloak] {
   display: none !important;

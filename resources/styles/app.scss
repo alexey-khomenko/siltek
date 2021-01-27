@@ -29,13 +29,9 @@
     width: 6em;
   }
 
-  .bxm-steps {
-    display: flex;
-  }
-
   table {
     width: calc(100% + 1em);
-    margin: 0 -0.5em 3em;
+    margin: 0 -0.5em;
 
     td {
       padding: 0.5em;
@@ -55,6 +51,7 @@
 
         &:disabled {
           cursor: not-allowed;
+          background-color: #eee;
         }
       }
 
@@ -101,66 +98,11 @@
     }
   }
 
-  .button:disabled:hover {
-    cursor: not-allowed;
-    color: #262626;
-    border: 1px solid transparent;
-    outline: none;
-    background: #fc0;
-  }
-
-  .button.gray-button:disabled:hover {
-    cursor: not-allowed;
-    background: transparent;
-    border: 1px solid #ccc;
-    color: #959595;
+  hr {
+    margin: 1em 0;
   }
 
   [x-cloak] {
     display: none !important;
   }
-/*
-  .bxm-transition {
-    transition: transform 400ms linear;
-
-    &-1-enter {
-      &-start {
-        transform:translateX(-100%);
-      }
-
-      &-end {
-        transform:translateX(0);
-      }
-    }
-
-    &-1-leave {
-      &-start {
-        transform:translateX(0);
-      }
-
-      &-end {
-        transform:translateX(-100%);
-      }
-    }
-
-    &-2-enter {
-      &-start {
-        transform:translateX(100%);
-      }
-
-      &-end {
-        transform:translateX(0);
-      }
-    }
-
-    &-2-leave {
-      &-start {
-        transform:translateX(0);
-      }
-
-      &-end {
-        transform:translateX(100%);
-      }
-    }
-  }*/
 }
