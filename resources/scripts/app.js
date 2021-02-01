@@ -17,17 +17,18 @@ window.calculatorData = function () {
 
         pack: 0,
         packs: [],
-        pack_coefficient: 1,
         base: '',
 
+        pack_coefficient: 1,
         pigments: [],
-        pigments_price: 0,
         pigments_price_up: '0.00',
-        pigments_price_amount: 0,
-        base_price: 0,
+        base_price: '0.00',
+
+        pigments_price: '0.00',
+        pigments_price_amount: '0.00',
         base_discount: '0.0',
-        base_amount: 0,
-        amount: 0,
+        base_amount: '0.00',
+        amount: '0.00',
 
         calculate: {
             ["@input.debounce"](){
@@ -101,7 +102,6 @@ window.calculatorData = function () {
             this.load(mode).then(r => {
                 this.base = r.base;
                 this.packs = r.packs;
-                this.pack_coefficient = r.pack_coefficient;
             });
         },
 
@@ -111,6 +111,7 @@ window.calculatorData = function () {
             this.cleanStep2();
 
             this.load(mode).then(r => {
+                this.pack_coefficient = r.pack_coefficient;
                 this.pigments = r.pigments;
                 this.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
                 this.base_price = parseFloat(r.base_price).toFixed(2);
