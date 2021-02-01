@@ -121,7 +121,7 @@
                           <td x-text="item.name"></td>
                           <td x-text="item.quantity"></td>
                           <td>
-                            <input class="text-center bxm-step-2-right-inner" type="number" step="0.01" min="0.00" x-model="pigments[index]['price']" x-spread="calculate">
+                            <input class="text-center bxm-step-2-right-inner" type="text" x-model="pigments[index]['price']" x-spread="calculate">
                           </td>
                           <td x-text="item.sum"></td>
                         </tr>
@@ -136,7 +136,7 @@
                       <tr>
                         <td class="text-right" colspan="3">Доплата за тонування, грн. з ПДВ</td>
                         <td class="bxm-td-number">
-                          <input class="text-center bxm-step-2-right-inner" type="number" step="0.01" min="0.00" name="pigments_price_up" x-model="pigments_price_up" x-spread="calculate">
+                          <input class="text-center bxm-step-2-right-inner" type="text" step="0.01" min="0.00" name="pigments_price_up" x-model="pigments_price_up" x-spread="calculate">
                         </td>
                       </tr>
                       <tr>
@@ -150,7 +150,7 @@
                       <tr>
                         <td class="text-right" colspan="3"><strong>% знижки</strong></td>
                         <td class="bxm-td-number">
-                          <input class="text-center bxm-step-2-right-inner" type="number" step="0.1" min="0.0" max="100.0" name="base_discount" x-model="base_discount" x-spread="calculate">
+                          <input class="text-center bxm-step-2-right-inner" type="text" step="0.1" min="0.0" max="100.0" name="base_discount" x-model="base_discount" x-spread="calculate">
                         </td>
                       </tr>
                       <tr>
