@@ -5,41 +5,59 @@ table
                 strong
                     | Продукт
             td
-                select(name="product", @change="product = $event.target.value; loadColors();", :disabled="!products.length")
+                select(name="product", @change="product = $event.target.value; loadParts();", :disabled="!products.length")
                     template(x-if="!product")
                         option
+                            | Оберіть
                     template(x-for="item in products", :key="item.id")
                         option(:value="item.id", x-text="item.name")
+                include ../../partials/chevrone
             td(rowspan="4", class="bxm-step-1-right")
-                div(class="bxm-step-1-right-inner")
-                    template(x-if="photo")
+                template(x-if="photo.length")
+                    div(class="bxm-img-wrap")
                         img(:src="photo")
-                    template(x-if="loading")
-                        svg(focusable="false", xmlns="http://www.w3.org/2000/svg", viewBox="0 0 512 512", width="40", height="40")
-                            path(fill="currentColor", d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z")
+                template(x-if="loading")
+                    div(class="bxm-svg-wrap")
+                        include ../../partials/spinner
+        tr
+            td(class="text-right bxm-step-1-left")
+                strong
+                    | Серія кольору
+            td
+                select(name="part", @change="part = $event.target.value; loadColors();", :disabled="!parts.length")
+                    template(x-if="!color")
+                        option
+                            | Оберіть
+                    template(x-for="item in parts", :key="item.id")
+                        option(:value="item.id", x-text="item.name")
+                include ../../partials/chevrone
         tr
             td(class="text-right bxm-step-1-left")
                 strong
                     | Номер кольору
             td
-                select(name="color", @change="color = $event.target.value; loadPacks()", :disabled="!colors.length")
+                select(name="color", @change="color = $event.target.value; loadPacks();", :disabled="!colors.length")
                     template(x-if="!color")
                         option
+                            | Оберіть
                     template(x-for="item in colors", :key="item.id")
                         option(:value="item.id", x-text="item.name")
+                include ../../partials/chevrone
         tr
             td(class="text-right bxm-step-1-left")
                 strong
                     | Тара
             td
-                select(name="pack", @change="pack = $event.target.value; loadPigments()", :disabled="!packs.length")
+                select(name="pack", @change="pack = $event.target.value; loadPigments();", :disabled="!packs.length")
                     template(x-if="!pack")
                         option
+                            | Оберіть
                     template(x-for="item in packs", :key="item.id")
                         option(:value="item.id", x-text="item.name")
+                include ../../partials/chevrone
         tr
             td(class="text-right bxm-step-1-left")
                 strong
                     | База
-            td
+            td(colspan="2")
                 div(class="bxm-base", x-text="base")
