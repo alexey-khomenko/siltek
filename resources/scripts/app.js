@@ -42,9 +42,6 @@ window.calculatorData = function () {
         calculates: function () {
             this.pigments_price = 0;
             for (let i = 0, n = this.pigments.length; i < n; i++) {
-
-                console.log(this.pigments[i]['price']);
-
                 const sum = parseFloat(this.pigments[i]['quantity']) * parseFloat(this.pigments[i]['price']) * parseFloat(this.pack_coefficient) / 1000;
 
                 this.pigments[i]['sum'] = sum.toFixed(2);
@@ -114,7 +111,7 @@ window.calculatorData = function () {
             this.cleanStep2();
 
             this.load(mode).then(r => {
-                this.pack_coefficient = r.pack_coefficient;
+                this.pack_coefficient = parseFloat(r.pack_coefficient);
                 this.pigments = r.pigments;
                 this.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
                 this.base_price = parseFloat(r.base_price).toFixed(2);

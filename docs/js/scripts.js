@@ -2019,7 +2019,6 @@ window.calculatorData = function () {
       this.pigments_price = 0;
 
       for (var i = 0, n = this.pigments.length; i < n; i++) {
-        console.log(this.pigments[i]['price']);
         var sum = parseFloat(this.pigments[i]['quantity']) * parseFloat(this.pigments[i]['price']) * parseFloat(this.pack_coefficient) / 1000;
         this.pigments[i]['sum'] = sum.toFixed(2);
         this.pigments[i]['price'] = parseFloat(this.pigments[i]['price']).toFixed(2);
@@ -2173,7 +2172,7 @@ window.calculatorData = function () {
                 mode = 'pigments';
                 this.cleanStep2();
                 this.load(mode).then(function (r) {
-                  _this5.pack_coefficient = r.pack_coefficient;
+                  _this5.pack_coefficient = parseFloat(r.pack_coefficient);
                   _this5.pigments = r.pigments;
                   _this5.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
                   _this5.base_price = parseFloat(r.base_price).toFixed(2);

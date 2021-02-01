@@ -116,11 +116,13 @@
                         <td><strong>Ціна 1 л<br>пігменту,<br>грн з ПДВ</strong></td>
                         <td class="bxm-step-2-right"><strong>Ціна пігменту, грн з ПДВ</strong></td>
                       </tr>
-                      <template x-for="item in pigments">
+                      <template x-for="(item, index) in pigments" :key="index">
                         <tr>
                           <td x-text="item.name"></td>
                           <td x-text="item.quantity"></td>
-                          <td x-text="item.price"></td>
+                          <td>
+                            <input class="text-center bxm-step-2-right-inner" type="number" step="0.01" min="0.00" x-model="pigments[index]['price']" x-spread="calculate">
+                          </td>
                           <td x-text="item.sum"></td>
                         </tr>
                       </template>

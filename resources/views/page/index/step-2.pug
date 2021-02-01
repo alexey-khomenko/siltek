@@ -22,12 +22,12 @@ div(class="bxm-step-2", x-show="step2", x-cloak)
                     strong
                         | Ціна пігменту, грн з ПДВ
 
-            template(x-for="item in pigments" )
+            template(x-for="(item, index) in pigments" :key="index")
                 tr
                     td(x-text="item.name")
                     td(x-text="item.quantity")
-                    td(x-text="item.price")
-
+                    td
+                        input(type="number", step="0.01", min="0.00", class="text-center bxm-step-2-right-inner", x-model="pigments[index]['price']", x-spread="calculate")
                     td(x-text="item.sum")
 
             tr
