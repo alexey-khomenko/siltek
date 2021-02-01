@@ -1993,23 +1993,23 @@ window.calculatorData = function () {
     loading: false,
     product: 0,
     products: [],
-    photo: '',
     part: 0,
     parts: [],
+    photo: '',
     color: 0,
     colors: [],
     pack: 0,
     packs: [],
-    pack_coefficient: 1,
     base: '',
+    pack_coefficient: 1,
     pigments: [],
-    pigments_price: 0,
     pigments_price_up: '0.00',
-    pigments_price_amount: 0,
-    base_price: 0,
+    base_price: '0.00',
+    pigments_price: '0.00',
+    pigments_price_amount: '0.00',
     base_discount: '0.0',
-    base_amount: 0,
-    amount: 0,
+    base_amount: '0.00',
+    amount: '0.00',
     calculate: (_calculate = {}, _defineProperty(_calculate, "@input.debounce", function inputDebounce() {
       this.calculates();
     }), _defineProperty(_calculate, "@paste.debounce", function pasteDebounce() {
@@ -2034,7 +2034,9 @@ window.calculatorData = function () {
     },
     loadProducts: function () {
       var _loadProducts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var mode, result;
+        var _this = this;
+
+        var mode;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2046,14 +2048,11 @@ window.calculatorData = function () {
                 this.cleanPacks();
                 this.cleanStep2();
                 _context.next = 8;
-                return this.load(mode);
+                return this.load(mode).then(function (r) {
+                  return _this.products = r;
+                });
 
               case 8:
-                result = _context.sent;
-                this.products = result.products;
-                this.photo = result.photo;
-
-              case 11:
               case "end":
                 return _context.stop();
             }
@@ -2069,6 +2068,8 @@ window.calculatorData = function () {
     }(),
     loadParts: function () {
       var _loadParts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var _this2 = this;
+
         var mode;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
@@ -2079,13 +2080,12 @@ window.calculatorData = function () {
                 this.cleanColors();
                 this.cleanPacks();
                 this.cleanStep2();
-                _context2.next = 7;
-                return this.load(mode);
+                this.load(mode).then(function (r) {
+                  _this2.parts = r.parts;
+                  _this2.photo = r.photo;
+                });
 
-              case 7:
-                this.parts = _context2.sent;
-
-              case 8:
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -2101,6 +2101,8 @@ window.calculatorData = function () {
     }(),
     loadColors: function () {
       var _loadColors = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var _this3 = this;
+
         var mode;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
@@ -2110,13 +2112,11 @@ window.calculatorData = function () {
                 this.cleanColors();
                 this.cleanPacks();
                 this.cleanStep2();
-                _context3.next = 6;
-                return this.load(mode);
+                this.load(mode).then(function (r) {
+                  return _this3.colors = r;
+                });
 
-              case 6:
-                this.colors = _context3.sent;
-
-              case 7:
+              case 5:
               case "end":
                 return _context3.stop();
             }
@@ -2132,7 +2132,9 @@ window.calculatorData = function () {
     }(),
     loadPacks: function () {
       var _loadPacks = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var mode, result;
+        var _this4 = this;
+
+        var mode;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -2140,16 +2142,12 @@ window.calculatorData = function () {
                 mode = 'packs';
                 this.cleanPacks();
                 this.cleanStep2();
-                _context4.next = 5;
-                return this.load(mode);
+                this.load(mode).then(function (r) {
+                  _this4.base = r.base;
+                  _this4.packs = r.packs;
+                });
 
-              case 5:
-                result = _context4.sent;
-                this.base = result.base;
-                this.packs = result.packs;
-                this.pack_coefficient = result.pack_coefficient;
-
-              case 9:
+              case 4:
               case "end":
                 return _context4.stop();
             }
@@ -2165,25 +2163,27 @@ window.calculatorData = function () {
     }(),
     loadPigments: function () {
       var _loadPigments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var mode, result;
+        var _this5 = this;
+
+        var mode;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 mode = 'pigments';
                 this.cleanStep2();
-                _context5.next = 4;
-                return this.load(mode);
+                this.load(mode).then(function (r) {
+                  _this5.pack_coefficient = r.pack_coefficient;
+                  _this5.pigments = r.pigments;
+                  _this5.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
+                  _this5.base_price = parseFloat(r.base_price).toFixed(2);
 
-              case 4:
-                result = _context5.sent;
-                this.pigments = result.pigments;
-                this.pigments_price_up = parseFloat(result.pigments_price_up).toFixed(2);
-                this.base_price = parseFloat(result.base_price).toFixed(2);
-                this.calculates();
-                this.step2 = true;
+                  _this5.calculates();
 
-              case 10:
+                  _this5.step2 = true;
+                });
+
+              case 3:
               case "end":
                 return _context5.stop();
             }
@@ -2239,11 +2239,11 @@ window.calculatorData = function () {
     cleanProducts: function cleanProducts() {
       this.product = 0;
       this.products = [];
-      this.photo = '';
     },
     cleanParts: function cleanParts() {
       this.part = 0;
       this.parts = [];
+      this.photo = '';
     },
     cleanColors: function cleanColors() {
       this.color = 0;
@@ -2252,11 +2252,11 @@ window.calculatorData = function () {
     cleanPacks: function cleanPacks() {
       this.pack = 0;
       this.packs = [];
-      this.pack_coefficient = 1;
       this.base = '';
     },
     cleanStep2: function cleanStep2() {
       this.step2 = false;
+      this.pack_coefficient = 1;
       this.pigments = [];
       this.pigments_price = '0.00';
       this.pigments_price_up = '0.00';
@@ -2269,37 +2269,37 @@ window.calculatorData = function () {
     mock: function mock(mode) {
       switch (mode) {
         case 'products':
+          return [{
+            id: 1,
+            name: 'product1'
+          }, {
+            id: 2,
+            name: 'product2'
+          }, {
+            id: 3,
+            name: 'product3'
+          }, {
+            id: 4,
+            name: 'product4'
+          }];
+
+        case 'parts':
           return {
-            products: [{
+            'parts': [{
               id: 1,
-              name: 'product1'
+              name: 'part1'
             }, {
               id: 2,
-              name: 'product2'
+              name: 'part2'
             }, {
               id: 3,
-              name: 'product3'
+              name: 'part3'
             }, {
               id: 4,
-              name: 'product4'
+              name: 'part4'
             }],
             photo: './images/1.jpg'
           };
-
-        case 'parts':
-          return [{
-            id: 1,
-            name: 'part1'
-          }, {
-            id: 2,
-            name: 'part2'
-          }, {
-            id: 3,
-            name: 'part3'
-          }, {
-            id: 4,
-            name: 'part4'
-          }];
 
         case 'colors':
           return [{
@@ -2331,12 +2331,12 @@ window.calculatorData = function () {
               id: 4,
               name: 'pack4'
             }],
-            pack_coefficient: 1.2,
             base: 'base1'
           };
 
         case 'pigments':
           return {
+            pack_coefficient: 1.2,
             pigments: [{
               name: 'name1',
               quantity: 100,

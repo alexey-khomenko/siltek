@@ -1,4 +1,5 @@
 import 'alpinejs';
+
 window.calculatorData = function () {
     return {
         step2: false,
@@ -6,33 +7,34 @@ window.calculatorData = function () {
 
         product: 0,
         products: [],
-        photo: '',
 
         part: 0,
         parts: [],
+        photo: '',
 
         color: 0,
         colors: [],
 
         pack: 0,
         packs: [],
-        pack_coefficient: 1,
         base: '',
 
+        pack_coefficient: 1,
         pigments: [],
-        pigments_price: 0,
         pigments_price_up: '0.00',
-        pigments_price_amount: 0,
-        base_price: 0,
+        base_price: '0.00',
+
+        pigments_price: '0.00',
+        pigments_price_amount: '0.00',
         base_discount: '0.0',
-        base_amount: 0,
-        amount: 0,
+        base_amount: '0.00',
+        amount: '0.00',
 
         calculate: {
-            ["@input.debounce"](){
+            ["@input.debounce"]() {
                 this.calculates();
             },
-            ["@paste.debounce"](){
+            ["@paste.debounce"]() {
                 this.calculates();
             },
         },
@@ -67,9 +69,7 @@ window.calculatorData = function () {
             this.cleanPacks();
             this.cleanStep2();
 
-            const result = await this.load(mode);
-            this.products = result.products;
-            this.photo = result.photo;
+            await this.load(mode).then(r => this.products = r);
         },
 
         loadParts: async function () {
@@ -80,7 +80,10 @@ window.calculatorData = function () {
             this.cleanPacks();
             this.cleanStep2();
 
-            this.parts = await this.load(mode);
+            this.load(mode).then(r => {
+                this.parts = r.parts;
+                this.photo = r.photo;
+            });
         },
 
         loadColors: async function () {
@@ -90,7 +93,7 @@ window.calculatorData = function () {
             this.cleanPacks();
             this.cleanStep2();
 
-            this.colors = await this.load(mode);
+            this.load(mode).then(r => this.colors = r);
         },
 
         loadPacks: async function () {
@@ -99,10 +102,10 @@ window.calculatorData = function () {
             this.cleanPacks();
             this.cleanStep2();
 
-            const result = await this.load(mode);
-            this.base = result.base;
-            this.packs = result.packs;
-            this.pack_coefficient = result.pack_coefficient;
+            this.load(mode).then(r => {
+                this.base = r.base;
+                this.packs = r.packs;
+            });
         },
 
         loadPigments: async function () {
@@ -110,13 +113,15 @@ window.calculatorData = function () {
 
             this.cleanStep2();
 
-            const result = await this.load(mode);
-            this.pigments = result.pigments;
-            this.pigments_price_up = parseFloat(result.pigments_price_up).toFixed(2);
-            this.base_price = parseFloat(result.base_price).toFixed(2);
+            this.load(mode).then(r => {
+                this.pack_coefficient = r.pack_coefficient;
+                this.pigments = r.pigments;
+                this.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
+                this.base_price = parseFloat(r.base_price).toFixed(2);
 
-            this.calculates();
-            this.step2 = true;
+                this.calculates();
+                this.step2 = true;
+            });
         },
 
         load: async function (mode) {
@@ -141,11 +146,11 @@ window.calculatorData = function () {
         cleanProducts: function () {
             this.product = 0;
             this.products = [];
-            this.photo = '';
         },
         cleanParts: function () {
             this.part = 0;
             this.parts = [];
+            this.photo = '';
         },
         cleanColors: function () {
             this.color = 0;
@@ -154,12 +159,12 @@ window.calculatorData = function () {
         cleanPacks: function () {
             this.pack = 0;
             this.packs = [];
-            this.pack_coefficient = 1;
             this.base = '';
         },
         cleanStep2: function () {
             this.step2 = false;
 
+            this.pack_coefficient = 1;
             this.pigments = [];
             this.pigments_price = '0.00';
             this.pigments_price_up = '0.00';
@@ -173,47 +178,47 @@ window.calculatorData = function () {
         mock: function (mode) {
             switch (mode) {
                 case 'products':
+                    return [
+                        {
+                            id: 1,
+                            name: 'product1',
+                        },
+                        {
+                            id: 2,
+                            name: 'product2',
+                        },
+                        {
+                            id: 3,
+                            name: 'product3',
+                        },
+                        {
+                            id: 4,
+                            name: 'product4',
+                        },
+                    ];
+                case 'parts':
                     return {
-                        products: [
+                        'parts': [
                             {
                                 id: 1,
-                                name: 'product1',
+                                name: 'part1',
                             },
                             {
                                 id: 2,
-                                name: 'product2',
+                                name: 'part2',
                             },
                             {
                                 id: 3,
-                                name: 'product3',
+                                name: 'part3',
                             },
                             {
                                 id: 4,
-                                name: 'product4',
+                                name: 'part4',
                             },
                         ],
 
                         photo: './images/1.jpg'
                     };
-                case 'parts':
-                    return [
-                        {
-                            id: 1,
-                            name: 'part1',
-                        },
-                        {
-                            id: 2,
-                            name: 'part2',
-                        },
-                        {
-                            id: 3,
-                            name: 'part3',
-                        },
-                        {
-                            id: 4,
-                            name: 'part4',
-                        },
-                    ];
                 case 'colors':
                     return [
                         {
@@ -254,11 +259,12 @@ window.calculatorData = function () {
                             },
                         ],
 
-                        pack_coefficient: 1.2,
                         base: 'base1'
                     };
                 case 'pigments':
                     return {
+                        pack_coefficient: 1.2,
+
                         pigments: [
                             {
                                 name: 'name1',
@@ -277,8 +283,8 @@ window.calculatorData = function () {
                             },
                         ],
 
-                        pigments_price_up : 20,
-                        base_price : 300
+                        pigments_price_up: 20,
+                        base_price: 300
                     };
             }
         }
