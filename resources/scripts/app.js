@@ -111,7 +111,7 @@ window.calculatorData = function () {
             this.cleanStep2();
 
             this.load(mode).then(r => {
-                this.pack_coefficient = r.pack_coefficient;
+                this.pack_coefficient = parseFloat(r.pack_coefficient);
                 this.pigments = r.pigments;
                 this.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
                 this.base_price = parseFloat(r.base_price).toFixed(2);
@@ -141,11 +141,11 @@ window.calculatorData = function () {
         cleanProducts: function () {
             this.product = 0;
             this.products = [];
-            this.photo = '';
         },
         cleanParts: function () {
             this.part = 0;
             this.parts = [];
+            this.photo = '';
         },
         cleanColors: function () {
             this.color = 0;
@@ -154,12 +154,12 @@ window.calculatorData = function () {
         cleanPacks: function () {
             this.pack = 0;
             this.packs = [];
-            this.pack_coefficient = 1;
             this.base = '';
         },
         cleanStep2: function () {
             this.step2 = false;
 
+            this.pack_coefficient = 1;
             this.pigments = [];
             this.pigments_price = '0.00';
             this.pigments_price_up = '0.00';
