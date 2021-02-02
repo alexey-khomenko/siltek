@@ -39,22 +39,71 @@ window.calculatorData = function () {
             },
         },
 
-        calculates: function () {
-            this.pigments_price = 0;
+        calculatePigments: function () {
+            let pigments_price = 0;
+
             for (let i = 0, n = this.pigments.length; i < n; i++) {
-                const sum = parseFloat(this.pigments[i]['quantity']) * parseFloat(this.pigments[i]['price']) * parseFloat(this.pack_coefficient) / 1000;
+                let price, sum;
+
+                price = isNaN(parseFloat(this.pigments[i]['price'])) ? 0 : parseFloat(this.pigments[i]['price']);
+                price = price < 0 ? 0 : price;
+
+                sum = parseFloat(this.pigments[i]['quantity']) * price * parseFloat(this.pack_coefficient) / 1000;
+                pigments_price += sum;
 
                 this.pigments[i]['sum'] = sum.toFixed(2);
-                this.pigments[i]['price'] = parseFloat(this.pigments[i]['price']).toFixed(2);
-
-                this.pigments_price += sum;
+                this.pigments[i]['price'] = price.toFixed(2);
             }
-            this.pigments_price = (this.pigments_price).toFixed(2);
 
-            this.pigments_price_amount = (parseFloat(this.pigments_price) + parseFloat(this.pigments_price_up)).toFixed(2);
-            this.base_discount = parseFloat(this.base_discount).toFixed(1);
-            this.base_amount = (parseFloat(this.base_price) - parseFloat(this.base_price) * parseFloat(this.base_discount) / 100).toFixed(2);
-            this.amount = (parseFloat(this.base_amount) + parseFloat(this.pigments_price_amount)).toFixed(2);
+            this.pigments_price = pigments_price.toFixed(2);
+
+            return pigments_price;
+        },
+        calculatePigmentsPriceUp: function () {
+            let pigments_price_up;
+
+            pigments_price_up = isNaN(parseFloat(this.pigments_price_up)) ? 0 : parseFloat(this.pigments_price_up);
+            pigments_price_up = pigments_price_up < 0 ? 0 : pigments_price_up;
+
+            this.pigments_price_up = pigments_price_up.toFixed(2);
+
+            return pigments_price_up;
+        },
+        calculateBaseDiscount: function () {
+            let base_discount;
+
+            base_discount = isNaN(parseFloat(this.base_discount)) ? 0 : parseFloat(this.base_discount);
+            base_discount = base_discount < 0 ? 0 : base_discount;
+            base_discount = base_discount > 100 ? 100 : base_discount;
+
+            this.base_discount = base_discount.toFixed(1);
+
+            return base_discount;
+        },
+        calculatePigmentsPriceAmount: function (pigments_price, pigments_price_up) {
+            let pigments_price_amount = pigments_price + pigments_price_up;
+
+            this.pigments_price_amount = pigments_price_amount.toFixed(2);
+
+            return pigments_price_amount;
+
+        },
+        calculateBaseAmount: function (base_price, base_discount) {
+            let base_amount = base_price - base_price * base_discount / 100;
+
+            this.base_amount = base_amount.toFixed(2);
+
+            return base_amount;
+        },
+        calculates: function () {
+            let pigments_price = this.calculatePigments();
+            let pigments_price_up = this.calculatePigmentsPriceUp();
+            let base_discount = this.calculateBaseDiscount();
+            let pigments_price_amount = this.calculatePigmentsPriceAmount(pigments_price, pigments_price_up);
+            let base_price = parseFloat(this.base_price);
+            let base_amount = this.calculateBaseAmount(base_price, base_discount);
+
+            this.amount = (base_amount + pigments_price_amount).toFixed(2);
         },
 
         loadProducts: async function () {
@@ -66,9 +115,10 @@ window.calculatorData = function () {
             this.cleanPacks();
             this.cleanStep2();
 
-            this.load(mode).then(r => this.products = r);
+            await this.load(mode).then(r => {
+                this.products = r;
+            });
         },
-
         loadParts: async function () {
             const mode = 'parts';
 
@@ -82,7 +132,6 @@ window.calculatorData = function () {
                 this.photo = r.photo;
             });
         },
-
         loadColors: async function () {
             const mode = 'colors';
 
@@ -90,9 +139,10 @@ window.calculatorData = function () {
             this.cleanPacks();
             this.cleanStep2();
 
-            this.load(mode).then(r => this.colors = r);
+            this.load(mode).then(r => {
+                this.colors = r;
+            });
         },
-
         loadPacks: async function () {
             const mode = 'packs';
 
@@ -104,7 +154,6 @@ window.calculatorData = function () {
                 this.packs = r.packs;
             });
         },
-
         loadPigments: async function () {
             const mode = 'pigments';
 
@@ -120,7 +169,6 @@ window.calculatorData = function () {
                 this.step2 = true;
             });
         },
-
         load: async function (mode) {
             const link = this.$el.action;
             const data = new FormData();
