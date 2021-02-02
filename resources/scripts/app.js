@@ -31,10 +31,10 @@ window.calculatorData = function () {
         amount: '0.00',
 
         calculate: {
-            ["@input.debounce"](){
+            ["@input.debounce.1000"](){
                 this.calculates();
             },
-            ["@paste.debounce"](){
+            ["@paste.debounce.1000"](){
                 this.calculates();
             },
         },
@@ -160,7 +160,7 @@ window.calculatorData = function () {
             this.cleanStep2();
 
             this.load(mode).then(r => {
-                this.pack_coefficient = parseFloat(r.pack_coefficient);
+                //this.pack_coefficient = parseFloat(r.pack_coefficient);
                 this.pigments = r.pigments;
                 this.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
                 this.base_price = parseFloat(r.base_price).toFixed(2);
