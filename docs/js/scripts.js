@@ -2010,9 +2010,9 @@ window.calculatorData = function () {
     base_discount: '0.0',
     base_amount: '0.00',
     amount: '0.00',
-    calculate: (_calculate = {}, _defineProperty(_calculate, "@input.debounce", function inputDebounce() {
+    calculate: (_calculate = {}, _defineProperty(_calculate, "@input.debounce.1000", function inputDebounce1000() {
       this.calculates();
-    }), _defineProperty(_calculate, "@paste.debounce", function pasteDebounce() {
+    }), _defineProperty(_calculate, "@paste.debounce.1000", function pasteDebounce1000() {
       this.calculates();
     }), _calculate),
     calculatePigments: function calculatePigments() {
@@ -2207,7 +2207,7 @@ window.calculatorData = function () {
                 mode = 'pigments';
                 this.cleanStep2();
                 this.load(mode).then(function (r) {
-                  _this5.pack_coefficient = parseFloat(r.pack_coefficient);
+                  //this.pack_coefficient = parseFloat(r.pack_coefficient);
                   _this5.pigments = r.pigments;
                   _this5.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
                   _this5.base_price = parseFloat(r.base_price).toFixed(2);
