@@ -6,6 +6,8 @@ block title
 block main
     - action = 'ajax.php';
 
-    form(action=action, class="block-form-questions text-center bxm-calculator-wrap", x-data="calculatorData()", x-init="loadProducts()", @submit.prevent="")
+    form(action=action, class="block-form-questions text-center bxm-calculator-wrap", data-placeholder="Оберіть",
+        x-data="calculatorData()", x-init="calculatorInit()", @submit.prevent=""
+    )
         include ../page/index/step-1
         include ../page/index/step-2

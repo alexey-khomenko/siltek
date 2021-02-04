@@ -19,7 +19,7 @@
               </h1>
             </div>
             <div class="section-content">
-              <form class="block-form-questions text-center bxm-calculator-wrap" action="ajax.php" x-data="calculatorData()" x-init="loadProducts()" @submit.prevent="">
+              <form class="block-form-questions text-center bxm-calculator-wrap" action="ajax.php" data-placeholder="Оберіть" x-data="calculatorData()" x-init="calculatorInit()" @submit.prevent="">
                 <table>
                   <tbody>
                     <tr>
@@ -69,17 +69,15 @@
                     <tr>
                       <td class="text-right bxm-step-1-left"><strong>Номер кольору</strong></td>
                       <td>
-                        <select name="color" @change="color = $event.target.value; loadPacks();" :disabled="!colors.length">
-                          <template x-if="!color">
-                            <option>Оберіть</option>
-                          </template>
-                          <template x-for="item in colors" :key="item.id">
-                            <option :value="item.id" x-text="item.name"></option>
-                          </template>
-                        </select>
+                        <input style="padding-left:.75em" x-model="color_value" :placeholder="color_placeholder" :disabled="!colors.length" @focus.debounce="list = true; color_placeholder = '';" @blur="color_placeholder = placeholder;">
                         <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="12">
                           <path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path>
                         </svg>
+                        <ul x-show="list" x-cloak @click.away="list = false">
+                          <template x-for="item in colors_filtered" :key="item.id">
+                            <li :data-value="item.id" x-text="item.name" @click="color = item.id; list = false; loadPacks(); color_value = item.name;"></li>
+                          </template>
+                        </ul>
                       </td>
                     </tr>
                     <tr>

@@ -1977,11 +1977,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(alpinejs__WEBPACK_IMPORTED_MODULE_1__);
 
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -1991,6 +1991,8 @@ window.calculatorData = function () {
   return {
     step2: false,
     loading: false,
+    list: false,
+    placeholder: '',
     product: 0,
     products: [],
     part: 0,
@@ -1998,6 +2000,9 @@ window.calculatorData = function () {
     photo: '',
     color: 0,
     colors: [],
+    colors_filtered: [],
+    color_value: '',
+    color_placeholder: 'Оберіть',
     pack: 0,
     packs: [],
     base: '',
@@ -2010,6 +2015,44 @@ window.calculatorData = function () {
     base_discount: '0.0',
     base_amount: '0.00',
     amount: '0.00',
+    calculatorInit: function () {
+      var _calculatorInit = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.placeholder = this.$el.dataset.placeholder;
+                _context.next = 3;
+                return this.loadProducts();
+
+              case 3:
+                this.$watch("color_value", function (value) {
+                  return _this.colorsFilter(value);
+                });
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function calculatorInit() {
+        return _calculatorInit.apply(this, arguments);
+      }
+
+      return calculatorInit;
+    }(),
+    colorsFilter: function colorsFilter(value) {
+      this.cleanPacks();
+      this.cleanStep2();
+      this.colors_filtered = this.colors.filter(function (color) {
+        return ~color.name.indexOf(value.trim());
+      });
+    },
     calculate: (_calculate = {}, _defineProperty(_calculate, "@input.debounce.1000", function inputDebounce1000() {
       this.calculates();
     }), _defineProperty(_calculate, "@paste.debounce.1000", function pasteDebounce1000() {
@@ -2067,13 +2110,13 @@ window.calculatorData = function () {
       this.amount = (base_amount + pigments_price_amount).toFixed(2);
     },
     loadProducts: function () {
-      var _loadProducts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var _this = this;
+      var _loadProducts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var _this2 = this;
 
         var mode;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 mode = 'products';
                 this.cleanProducts();
@@ -2081,17 +2124,17 @@ window.calculatorData = function () {
                 this.cleanColors();
                 this.cleanPacks();
                 this.cleanStep2();
-                _context.next = 8;
+                _context2.next = 8;
                 return this.load(mode).then(function (r) {
-                  _this.products = r;
+                  _this2.products = r;
                 });
 
               case 8:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this);
       }));
 
       function loadProducts() {
@@ -2101,13 +2144,13 @@ window.calculatorData = function () {
       return loadProducts;
     }(),
     loadParts: function () {
-      var _loadParts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var _this2 = this;
+      var _loadParts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var _this3 = this;
 
         var mode;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 mode = 'parts';
                 this.cleanParts();
@@ -2115,16 +2158,16 @@ window.calculatorData = function () {
                 this.cleanPacks();
                 this.cleanStep2();
                 this.load(mode).then(function (r) {
-                  _this2.parts = r.parts;
-                  _this2.photo = r.photo;
+                  _this3.parts = r.parts;
+                  _this3.photo = r.photo;
                 });
 
               case 6:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
       function loadParts() {
@@ -2134,28 +2177,29 @@ window.calculatorData = function () {
       return loadParts;
     }(),
     loadColors: function () {
-      var _loadColors = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var _this3 = this;
+      var _loadColors = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var _this4 = this;
 
         var mode;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 mode = 'colors';
                 this.cleanColors();
                 this.cleanPacks();
                 this.cleanStep2();
                 this.load(mode).then(function (r) {
-                  _this3.colors = r;
+                  _this4.colors = r;
+                  _this4.colors_filtered = r;
                 });
 
               case 5:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee4, this);
       }));
 
       function loadColors() {
@@ -2165,28 +2209,28 @@ window.calculatorData = function () {
       return loadColors;
     }(),
     loadPacks: function () {
-      var _loadPacks = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var _this4 = this;
+      var _loadPacks = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var _this5 = this;
 
         var mode;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
                 mode = 'packs';
                 this.cleanPacks();
                 this.cleanStep2();
                 this.load(mode).then(function (r) {
-                  _this4.base = r.base;
-                  _this4.packs = r.packs;
+                  _this5.base = r.base;
+                  _this5.packs = r.packs;
                 });
 
               case 4:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee5, this);
       }));
 
       function loadPacks() {
@@ -2196,33 +2240,33 @@ window.calculatorData = function () {
       return loadPacks;
     }(),
     loadPigments: function () {
-      var _loadPigments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var _this5 = this;
+      var _loadPigments = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var _this6 = this;
 
         var mode;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
                 mode = 'pigments';
                 this.cleanStep2();
                 this.load(mode).then(function (r) {
                   //this.pack_coefficient = parseFloat(r.pack_coefficient);
-                  _this5.pigments = r.pigments;
-                  _this5.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
-                  _this5.base_price = parseFloat(r.base_price).toFixed(2);
+                  _this6.pigments = r.pigments;
+                  _this6.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
+                  _this6.base_price = parseFloat(r.base_price).toFixed(2);
 
-                  _this5.calculates();
+                  _this6.calculates();
 
-                  _this5.step2 = true;
+                  _this6.step2 = true;
                 });
 
               case 3:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, this);
+        }, _callee6, this);
       }));
 
       function loadPigments() {
@@ -2232,11 +2276,11 @@ window.calculatorData = function () {
       return loadPigments;
     }(),
     load: function () {
-      var _load = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(mode) {
+      var _load = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(mode) {
         var link, data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context7.prev = _context7.next) {
               case 0:
                 link = this.$el.action;
                 data = new FormData();
@@ -2247,21 +2291,21 @@ window.calculatorData = function () {
                 data.append('pack', this.pack);
                 console.log(link + ' ' + mode);
                 this.loading = true;
-                _context6.next = 11;
+                _context7.next = 11;
                 return new Promise(function (resolve) {
                   return setTimeout(resolve, 500);
                 });
 
               case 11:
                 this.loading = false;
-                return _context6.abrupt("return", this.mock(mode));
+                return _context7.abrupt("return", this.mock(mode));
 
               case 13:
               case "end":
-                return _context6.stop();
+                return _context7.stop();
             }
           }
-        }, _callee6, this);
+        }, _callee7, this);
       }));
 
       function load(_x) {
@@ -2282,6 +2326,7 @@ window.calculatorData = function () {
     cleanColors: function cleanColors() {
       this.color = 0;
       this.colors = [];
+      this.color_value = '';
     },
     cleanPacks: function cleanPacks() {
       this.pack = 0;
@@ -2338,16 +2383,16 @@ window.calculatorData = function () {
         case 'colors':
           return [{
             id: 1,
-            name: 'color1'
+            name: 'color11'
           }, {
             id: 2,
-            name: 'color2'
+            name: 'color12'
           }, {
             id: 3,
             name: 'color3'
           }, {
             id: 4,
-            name: 'color4'
+            name: 'colr4'
           }];
 
         case 'packs':
