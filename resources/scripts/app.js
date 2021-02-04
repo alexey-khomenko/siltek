@@ -18,7 +18,7 @@ window.calculatorData = function () {
         colors: [],
         colors_filtered: [],
         color_value: '',
-        color_placeholder: 'Оберіть',
+        color_placeholder: '',
 
         pack: 0,
         packs: [],
@@ -37,6 +37,7 @@ window.calculatorData = function () {
 
         calculatorInit: async function () {
             this.placeholder = this.$el.dataset.placeholder;
+            this.color_placeholder = this.$el.dataset.placeholder;
             await this.loadProducts();
             this.$watch("color_value", value => this.colorsFilter(value));
         },

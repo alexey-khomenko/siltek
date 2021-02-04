@@ -2002,7 +2002,7 @@ window.calculatorData = function () {
     colors: [],
     colors_filtered: [],
     color_value: '',
-    color_placeholder: 'Оберіть',
+    color_placeholder: '',
     pack: 0,
     packs: [],
     base: '',
@@ -2024,15 +2024,16 @@ window.calculatorData = function () {
             switch (_context.prev = _context.next) {
               case 0:
                 this.placeholder = this.$el.dataset.placeholder;
-                _context.next = 3;
+                this.color_placeholder = this.$el.dataset.placeholder;
+                _context.next = 4;
                 return this.loadProducts();
 
-              case 3:
+              case 4:
                 this.$watch("color_value", function (value) {
                   return _this.colorsFilter(value);
                 });
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
