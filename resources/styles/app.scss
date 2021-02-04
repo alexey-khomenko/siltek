@@ -23,6 +23,9 @@
 
   .bxm-step-2-right-inner {
     width: 6em;
+    height: 2em;
+    margin: 0 auto;
+    cursor: text;
   }
 
   @media (max-width: 479px) {
@@ -46,7 +49,7 @@
         line-height: 1.75;
       }
 
-      select {
+      select, input {
         display: block;
         background-color: #fff;
         border: 1px solid #eee;
@@ -59,40 +62,58 @@
         appearance: none;
         font-size: inherit;
 
-        &:disabled {
-          cursor: not-allowed;
-          background-color: #eee;
-          color: #999;
-
-          & + svg {
-            color: #999;
-          }
-        }
-
-        & + svg {
-          position: absolute;
-          top: 50%;
-          right: 1em;
-          transform: translateY(-50%);
-          pointer-events: none;
+        &::placeholder {
+          color: #000;
+          opacity: 1;
         }
       }
 
-      input {
-        background-color: #fff;
-        border: 1px solid #eee;
-        font-size: inherit;
-        line-height: 1.75;
-        padding: 0 0.5em;
+      select:disabled, input:disabled {
+        cursor: not-allowed;
+        background-color: #eee;
+        color: #999;
 
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
+        &::placeholder {
+          color: #999;
         }
 
-        &[type=number] {
-          -moz-appearance: textfield;
+        & + svg {
+          color: #999;
+        }
+      }
+
+      select + svg, input + svg {
+        position: absolute;
+        top: 50%;
+        right: 1em;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+
+      ul {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        margin: -0.5em 0.5em 0;
+        padding: 0;
+        max-height: 120px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        background-color: #fff;
+        box-shadow: 0 0 4px 2px rgba(0, 0, 0, .7);
+
+        li {
+          display: block;
+          text-align: left;
+          cursor: pointer;
+          padding: .5em .75em;
+
+          &:hover {
+            background-color: #eee;
+          }
         }
       }
 

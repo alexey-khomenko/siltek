@@ -4,6 +4,8 @@ window.calculatorData = function () {
     return {
         step2: false,
         loading: false,
+        list: false,
+        placeholder: '',
 
         product: 0,
         products: [],
@@ -14,6 +16,9 @@ window.calculatorData = function () {
 
         color: 0,
         colors: [],
+        colors_filtered: [],
+        color_value: '',
+        color_placeholder: '',
 
         pack: 0,
         packs: [],
@@ -30,11 +35,24 @@ window.calculatorData = function () {
         base_amount: '0.00',
         amount: '0.00',
 
+        calculatorInit: async function () {
+            this.placeholder = this.$el.dataset.placeholder;
+            this.color_placeholder = this.$el.dataset.placeholder;
+            await this.loadProducts();
+            this.$watch("color_value", value => this.colorsFilter(value));
+        },
+
+        colorsFilter: function (value) {
+            this.cleanPacks();
+            this.cleanStep2();
+            this.colors_filtered = this.colors.filter((color) => ~color.name.indexOf(value.trim()));
+        },
+
         calculate: {
-            ["@input.debounce.1000"](){
+            ["@input.debounce.1000"]() {
                 this.calculates();
             },
-            ["@paste.debounce.1000"](){
+            ["@paste.debounce.1000"]() {
                 this.calculates();
             },
         },
@@ -141,6 +159,7 @@ window.calculatorData = function () {
 
             this.load(mode).then(r => {
                 this.colors = r;
+                this.colors_filtered = r;
             });
         },
         loadPacks: async function () {
@@ -198,6 +217,7 @@ window.calculatorData = function () {
         cleanColors: function () {
             this.color = 0;
             this.colors = [];
+            this.color_value = '';
         },
         cleanPacks: function () {
             this.pack = 0;
@@ -216,6 +236,6 @@ window.calculatorData = function () {
             this.base_discount = '0.0';
             this.base_amount = '0.00';
             this.amount = '0.00';
-        },
+        }
     };
 }

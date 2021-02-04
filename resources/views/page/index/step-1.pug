@@ -36,13 +36,19 @@ table
                 strong
                     | Номер кольору
             td
-                select(name="color", @change="color = $event.target.value; loadPacks();", :disabled="!colors.length")
-                    template(x-if="!color")
-                        option
-                            | Оберіть
-                    template(x-for="item in colors", :key="item.id")
-                        option(:value="item.id", x-text="item.name")
+                input(style="padding-left:.75em",
+                    x-model="color_value",
+                    :placeholder="color_placeholder",
+                    :disabled="!colors.length",
+                    @focus.debounce="list = true; color_placeholder = '';",
+                    @blur="color_placeholder = placeholder;"
+                )
                 include ../../partials/chevrone
+                ul(x-show="list", x-cloak, @click.away="list = false")
+                    template(x-for="item in colors_filtered", :key="item.id")
+                        li(:data-value="item.id", x-text="item.name",
+                            @click="color = item.id; list = false; loadPacks(); color_value = item.name;"
+                        )
         tr
             td(class="text-right bxm-step-1-left")
                 strong
