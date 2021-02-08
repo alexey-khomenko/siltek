@@ -165,6 +165,19 @@
     margin: 1em 0;
   }
 
+  .bxm-alert {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 20px;
+    padding: 16px 10px;
+    min-height: 80px;
+    text-align: left;
+    background-color: pink;
+    font-weight: bold;
+    color: #000;
+  }
+
   [x-cloak] {
     display: none !important;
   }

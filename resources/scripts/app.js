@@ -45,7 +45,7 @@ window.calculatorData = function () {
         colorsFilter: function (value) {
             this.cleanPacks();
             this.cleanStep2();
-            this.colors_filtered = this.colors.filter((color) => ~color.name.indexOf(value.trim()));
+            this.colors_filtered = this.colors.filter((color) => ~color.name.indexOf(value.toUpperCase().trim()));
         },
 
         calculate: {
