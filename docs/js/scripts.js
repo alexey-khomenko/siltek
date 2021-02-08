@@ -2051,7 +2051,7 @@ window.calculatorData = function () {
       this.cleanPacks();
       this.cleanStep2();
       this.colors_filtered = this.colors.filter(function (color) {
-        return ~color.name.indexOf(value.trim());
+        return ~color.name.indexOf(value.toUpperCase().trim());
       });
     },
     calculate: (_calculate = {}, _defineProperty(_calculate, "@input.debounce.1000", function inputDebounce1000() {
@@ -2384,16 +2384,16 @@ window.calculatorData = function () {
         case 'colors':
           return [{
             id: 1,
-            name: 'color11'
+            name: 'COLOR11'
           }, {
             id: 2,
-            name: 'color12'
+            name: 'COLOR12'
           }, {
             id: 3,
-            name: 'color3'
+            name: 'COLOR3'
           }, {
             id: 4,
-            name: 'colr4'
+            name: 'COLR4'
           }];
 
         case 'packs':

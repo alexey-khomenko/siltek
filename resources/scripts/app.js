@@ -45,7 +45,7 @@ window.calculatorData = function () {
         colorsFilter: function (value) {
             this.cleanPacks();
             this.cleanStep2();
-            this.colors_filtered = this.colors.filter((color) => ~color.name.indexOf(value.trim()));
+            this.colors_filtered = this.colors.filter((color) => ~color.name.indexOf(value.toUpperCase().trim()));
         },
 
         calculate: {
@@ -288,19 +288,19 @@ window.calculatorData = function () {
                     return [
                         {
                             id: 1,
-                            name: 'color11',
+                            name: 'COLOR11',
                         },
                         {
                             id: 2,
-                            name: 'color12',
+                            name: 'COLOR12',
                         },
                         {
                             id: 3,
-                            name: 'color3',
+                            name: 'COLOR3',
                         },
                         {
                             id: 4,
-                            name: 'colr4',
+                            name: 'COLR4',
                         },
                     ];
                 case 'packs':
