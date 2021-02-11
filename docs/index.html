@@ -162,7 +162,7 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="bxm-alert" x-show="step2" x-cloak><span>* Отримання точної передачі кольору можливо при тонуванні фарби в тарі не менше 4 л.</span></div>
+                <div class="bxm-alert" x-show="step2 &amp;&amp; alert.length" x-cloak><span x-text="'* ' + alert"></span></div>
               </form>
             </div>
           </article>

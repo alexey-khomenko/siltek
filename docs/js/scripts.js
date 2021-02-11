@@ -2006,6 +2006,7 @@ window.calculatorData = function () {
     pack: 0,
     packs: [],
     base: '',
+    alert: '',
     pack_coefficient: 1,
     pigments: [],
     pigments_price_up: '0.00',
@@ -2224,6 +2225,7 @@ window.calculatorData = function () {
                 this.load(mode).then(function (r) {
                   _this5.base = r.base;
                   _this5.packs = r.packs;
+                  _this5.alert = r.alert;
                 });
 
               case 4:
@@ -2333,6 +2335,7 @@ window.calculatorData = function () {
       this.pack = 0;
       this.packs = [];
       this.base = '';
+      this.alert = '';
     },
     cleanStep2: function cleanStep2() {
       this.step2 = false;
@@ -2411,7 +2414,8 @@ window.calculatorData = function () {
               id: 4,
               name: 'pack4'
             }],
-            base: 'base1'
+            base: 'base1',
+            alert: 'Отримання точної передачі кольору можливо при тонуванні фарби в тарі не менше 4 л.'
           };
 
         case 'pigments':
