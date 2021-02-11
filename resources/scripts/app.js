@@ -23,6 +23,7 @@ window.calculatorData = function () {
         pack: 0,
         packs: [],
         base: '',
+        alert: '',
 
         pack_coefficient: 1,
         pigments: [],
@@ -171,6 +172,7 @@ window.calculatorData = function () {
             this.load(mode).then(r => {
                 this.base = r.base;
                 this.packs = r.packs;
+                this.alert = r.alert.trim();
             });
         },
         loadPigments: async function () {
@@ -179,7 +181,6 @@ window.calculatorData = function () {
             this.cleanStep2();
 
             this.load(mode).then(r => {
-                //this.pack_coefficient = parseFloat(r.pack_coefficient);
                 this.pigments = r.pigments;
                 this.pigments_price_up = parseFloat(r.pigments_price_up).toFixed(2);
                 this.base_price = parseFloat(r.base_price).toFixed(2);
@@ -223,6 +224,7 @@ window.calculatorData = function () {
             this.pack = 0;
             this.packs = [];
             this.base = '';
+            this.alert = '';
         },
         cleanStep2: function () {
             this.step2 = false;
