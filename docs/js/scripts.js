@@ -2225,7 +2225,7 @@ window.calculatorData = function () {
                 this.load(mode).then(function (r) {
                   _this5.base = r.base;
                   _this5.packs = r.packs;
-                  _this5.alert = r.alert;
+                  _this5.alert = r.alert.trim();
                 });
 
               case 4:

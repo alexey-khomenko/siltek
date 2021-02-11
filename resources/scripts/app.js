@@ -172,7 +172,7 @@ window.calculatorData = function () {
             this.load(mode).then(r => {
                 this.base = r.base;
                 this.packs = r.packs;
-                this.alert = r.alert;
+                this.alert = r.alert.trim();
             });
         },
         loadPigments: async function () {
