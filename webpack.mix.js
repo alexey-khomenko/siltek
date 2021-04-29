@@ -2,8 +2,6 @@ let mix = require('laravel-mix');
 mix.pug = require('laravel-mix-pug-recursive');
 require('laravel-mix-imagemin');
 
-// todo pug update
-
 mix
     .setPublicPath('docs')
     .setResourceRoot('../')
