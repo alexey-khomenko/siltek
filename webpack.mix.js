@@ -1,6 +1,8 @@
 let mix = require('laravel-mix');
 mix.pug = require('laravel-mix-pug');
 
+// todo pug update
+
 mix
     .setPublicPath('docs')
     .setResourceRoot('../')
